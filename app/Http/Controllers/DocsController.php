@@ -36,13 +36,17 @@ class DocsController extends Controller
 
     public function store()
     {
-        Auth::user()->account->docs()->create(
-            Request::validate([
+        Request::validate([
                 'docs_name' => ['required', 'max:100'],
-                'cover' => ['nullable', 'image'],
-                'files' => ['nullable', 'file'],
-            ])
-        );
+                'coverImg' => ['nullable', 'image'],
+                'pdf' => ['nullable', 'file'],
+        ]);
+     
+        Auth::user()->account->docs()->create([
+            'docs_name' => Request::get('docs_name'),
+            'cover' => Request::file('coverImg') ? Request::file('coverImg')->store('docs') : null,
+            'files' => Request::file('pdf') ? Request::file('pdf')->store('docs') : null,
+        ]);
 
         return Redirect::route('docs')->with('success', 'doc created.');
     }

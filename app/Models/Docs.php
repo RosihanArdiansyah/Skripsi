@@ -4,10 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\URL;
+use League\Glide\Server;
 
 class Docs extends Model
 {
     use SoftDeletes;
+
+    public function coverUrl(array $attributes)
+    {
+        if ($this->cover) {
+            return URL::to(App::make(Server::class)->fromPath($this->cover, $attributes));
+        }
+    }
 
      public function scopeFilter($query, array $filters)
     {
