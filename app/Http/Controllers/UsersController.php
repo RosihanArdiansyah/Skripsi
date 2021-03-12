@@ -40,6 +40,7 @@ class UsersController extends Controller
 
     public function store()
     {
+        $name = $request->file('photo')->getClientOriginalName();
         Request::validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
@@ -55,7 +56,7 @@ class UsersController extends Controller
             'email' => Request::get('email'),
             'password' => Request::get('password'),
             'owner' => Request::get('owner'),
-            'photo_path' => Request::file('photo') ? Request::file('photo')->store('users') : null,
+            'photo_path' => Request::file('photo') ? Request::file('photo')->storeAs('users',$name) : null,
         ]);
 
         return Redirect::route('users')->with('success', 'User created.');
@@ -82,6 +83,8 @@ class UsersController extends Controller
             return Redirect::back()->with('error', 'Updating the demo user is not allowed.');
         }
 
+        $name = Request::file('photo')->getClientOriginalName();
+
         Request::validate([
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
@@ -94,7 +97,7 @@ class UsersController extends Controller
         $user->update(Request::only('first_name', 'last_name', 'email', 'owner'));
 
         if (Request::file('photo')) {
-            $user->update(['photo_path' => Request::file('photo')->store('users')]);
+            $user->update(['photo_path' => Request::file('photo')->storeAs('users',$name)]);
         }
 
         if (Request::get('password')) {

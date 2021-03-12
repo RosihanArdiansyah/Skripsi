@@ -36,6 +36,8 @@ class DocsController extends Controller
 
     public function store()
     {
+        $imgName = Request::file('coverImg')->getClientOriginalName();
+        $docName = Request::file('pdf')->getClientOriginalName();
         Request::validate([
                 'docs_name' => ['required', 'max:100'],
                 'coverImg' => ['nullable', 'image'],
@@ -44,8 +46,8 @@ class DocsController extends Controller
      
         Auth::user()->account->docs()->create([
             'docs_name' => Request::get('docs_name'),
-            'cover' => Request::file('coverImg') ? Request::file('coverImg')->store('docs') : null,
-            'files' => Request::file('pdf') ? Request::file('pdf')->store('docs') : null,
+            'cover' => Request::file('coverImg') ? Request::file('coverImg')->store('docs',$imgName) : null,
+            'files' => Request::file('pdf') ? Request::file('pdf')->storeAs('docs',$docName) : null,
         ]);
 
         return Redirect::route('docs')->with('success', 'doc created.');
@@ -64,13 +66,24 @@ class DocsController extends Controller
 
     public function update(Docs $doc)
     {
-        $doc->update(
-            Request::validate([
-                'docs_name' => ['required', 'max:100'],
-                'cover' => ['nullable', 'image'],
-                'files' => ['nullable', 'file'],
-            ])
-        );
+        $imgName = Request::file('coverImg')->getClientOriginalName();
+        $docName = Request::file('pdf')->getClientOriginalName();
+
+        Request::validate([
+             'docs_name' => ['required', 'max:100'],
+             'cover' => ['nullable', 'image'],
+             'files' => ['nullable', 'file'],
+        ]);
+
+        $doc->update(Request::only('docs_name'));
+
+        if (Request::file('coverImg')) {
+            $user->update(['cover' => Request::file('coverImg')->storeAs('docs',$imgName)]);
+        }
+
+        if (Request::file('pdf')) {
+            $user->update(['files' => Request::file('pdf')->storeAs('docs',$docName)]);
+        }
 
         return Redirect::back()->with('success', 'doc updated.');
     }
