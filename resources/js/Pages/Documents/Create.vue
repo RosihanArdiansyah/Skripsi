@@ -1,0 +1,52 @@
+<template>
+  <div>
+    <h1 class="mb-8 font-bold text-3xl">
+      <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('docs')">Documents</inertia-link>
+      <span class="text-indigo-400 font-medium">/</span> Create
+    </h1>
+    <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
+      <form @submit.prevent="store">
+        <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
+          <text-input v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
+          <file-input v-model="form.cover" :error="form.errors.cover" class="pr-6 pb-8 w-full lg:w-1/2" type="file" accept="image/*" label="Cover" />
+          <file-input v-model="form.files" :error="form.errors.files" class="pr-6 pb-8 w-full lg:w-1/2" type="file" accept=".jpg" label="Files" />
+        </div>
+        <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
+          <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Documents</loading-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script>
+import Layout from '@/Shared/Layout'
+import TextInput from '@/Shared/TextInput'
+import FileInput from '@/Shared/FileInput'
+import SelectInput from '@/Shared/SelectInput'
+import LoadingButton from '@/Shared/LoadingButton'
+
+export default {
+  metaInfo: { title: 'Create Documents' },
+  components: {
+    LoadingButton,
+    FileInput,
+    SelectInput,
+    TextInput,
+  },
+  layout: Layout,
+  remember: 'form',
+  data() {
+    return {
+      form: this.$inertia.form({
+        docs_name: null,
+      }),
+    }
+  },
+  methods: {
+    store() {
+      this.form.post(this.route('docs.store'))
+    },
+  },
+}
+</script>
