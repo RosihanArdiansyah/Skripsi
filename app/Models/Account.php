@@ -19,8 +19,4 @@ class Account extends Model
         return $this->hasMany(Docs::class);
     }
 
-    public function contacts()
-    {
-        return $this->hasMany(Contact::class);
-    }
 }
