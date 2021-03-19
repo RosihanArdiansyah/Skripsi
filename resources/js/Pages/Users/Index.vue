@@ -46,11 +46,6 @@
               {{ user.owner ? 'Owner' : 'User' }}
             </inertia-link>
           </td>
-          <td class="border-t w-px">
-            <inertia-link class="px-4 flex items-center" :href="route('users.edit', user.id)" tabindex="-1">
-              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
-            </inertia-link>
-          </td>
         </tr>
         <tr v-if="users.length === 0">
           <td class="border-t px-6 py-4" colspan="4">No users found.</td>

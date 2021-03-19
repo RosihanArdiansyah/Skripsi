@@ -118,6 +118,10 @@ Route::get('docs/{doc}/edit', [DocsController::class, 'edit'])
     ->name('docs.edit')
     ->middleware('auth');
 
+Route::get('docs/{doc}/show', [DocsController::class, 'show'])
+    ->name('docs.show')
+    ->middleware('auth');
+
 Route::put('docs/{doc}', [DocsController::class, 'update'])
     ->name('docs.update')
     ->middleware('auth');

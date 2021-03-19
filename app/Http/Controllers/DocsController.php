@@ -6,6 +6,7 @@ use App\Models\Docs;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class DocsController extends Controller
@@ -24,6 +25,8 @@ class DocsController extends Controller
                         'id' => $docs->id,
                         'docs_name' => $docs->docs_name,
                         'deleted_at' => $docs->deleted_at,
+                        'coverImg' => $docs->coverUrl(['w' => 100, 'h' => 160, 'center']),
+                        'pdf'=> $docs->files,
                     ];
                 }),
         ]);
@@ -46,7 +49,7 @@ class DocsController extends Controller
      
         Auth::user()->account->docs()->create([
             'docs_name' => Request::get('docs_name'),
-            'cover' => Request::file('coverImg') ? Request::file('coverImg')->store('docs',$imgName) : null,
+            'cover' => Request::file('coverImg') ? Request::file('coverImg')->storeAs('docs',$imgName) : null,
             'files' => Request::file('pdf') ? Request::file('pdf')->storeAs('docs',$docName) : null,
         ]);
 
@@ -60,6 +63,18 @@ class DocsController extends Controller
                 'id' => $doc->id,
                 'docs_name' => $doc->docs_name,
                 'deleted_at' => $doc->deleted_at,
+                'coverImg' => $doc->coverUrl(['w' => 60, 'h' => 60, 'fit' => 'crop']),
+            ],
+        ]);
+    }
+
+     public function show(Docs $doc)
+    {
+        return Inertia::render('Documents/Show', [
+            'doc' => [
+                'id' => $doc->id,
+                'docs_name' => $doc->docs_name,
+                'filePdf' => $doc->files,
             ],
         ]);
     }
@@ -71,18 +86,18 @@ class DocsController extends Controller
 
         Request::validate([
              'docs_name' => ['required', 'max:100'],
-             'cover' => ['nullable', 'image'],
-             'files' => ['nullable', 'file'],
+             'coverImg' => ['nullable', 'image'],
+             'pdf' => ['nullable', 'file'],
         ]);
 
         $doc->update(Request::only('docs_name'));
 
         if (Request::file('coverImg')) {
-            $user->update(['cover' => Request::file('coverImg')->storeAs('docs',$imgName)]);
+            $doc->update(['cover' => Request::file('coverImg') ? Request::file('coverImg')->storeAs('docs',$imgName) : null]) ;
         }
 
         if (Request::file('pdf')) {
-            $user->update(['files' => Request::file('pdf')->storeAs('docs',$docName)]);
+            $doc->update([ 'files' => Request::file('pdf') ? Request::file('pdf')->storeAs('docs',$docName) : null]) ;
         }
 
         return Redirect::back()->with('success', 'doc updated.');

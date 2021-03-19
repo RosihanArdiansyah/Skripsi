@@ -16,21 +16,17 @@
       </inertia-link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
-      <table class="w-full whitespace-nowrap">
-        <tr class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4">Name</th>
-        </tr>
+      <table class="grid md:grid-cols-3 justify-items-center">
         <tr v-for="doc in docs.data" :key="doc.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-          <td class="border-t">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('docs.edit', doc.id)">
-              {{ doc.docs_name }}
-              <icon v-if="doc.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
-            </inertia-link>
-          </td>
-          <td class="border-t w-px">
-            <inertia-link class="px-4 flex items-center" :href="route('docs.edit', doc.id)" tabindex="-1">
-              <icon name="cheveron-right" class="block w-6 h-6 fill-gray-400" />
-            </inertia-link>
+          <td>
+              <div class="card m-4 text-center justify-items-center">
+                <img v-if="doc.coverImg" class="flex self-center h-360 w-360" :src="doc.coverImg" />
+                  <inertia-link class="px-6 py-4 flex items-center hover:underline focus:text-indigo-500" :href="route('docs.edit', doc.id)">
+                    {{ doc.docs_name }}
+                    <icon v-if="doc.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+                  </inertia-link>
+                <inertia-link v-if="doc.pdf" class="inline-block align-middle text-white-600 btn-indigo" as="button" type="button" :href="route('docs.show', doc.id)">Read</inertia-link>
+              </div>
           </td>
         </tr>
         <tr v-if="docs.data.length === 0">
@@ -83,6 +79,9 @@ export default {
   methods: {
     reset() {
       this.form = mapValues(this.form, () => null)
+    },
+    show(){
+      this.route('docs.show',this.doc.id)
     },
   },
 }

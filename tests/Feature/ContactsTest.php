@@ -16,7 +16,7 @@ class ContactsTest extends TestCase
     {
         parent::setUp();
 
-        $account = Account::create(['name' => 'Acme Corporation']);
+        $account = Account::create(['name' => 'Universitas Hasanuddin']);
 
         $this->user = factory(User::class)->create([
             'account_id' => $account->id,

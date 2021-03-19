@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Account;
-use App\Models\Contact;
 use App\Models\Organization;
 use App\Models\User;
 use App\Models\Docs;
@@ -11,7 +10,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $account = Account::create(['name' => 'Acme Corporation']);
+        $account = Account::create(['name' => 'Universitas Hasanuddin']);
 
         factory(User::class)->create([
             'account_id' => $account->id,
@@ -29,10 +28,6 @@ class DatabaseSeeder extends Seeder
         factory(Docs::class, 100)
             ->create(['account_id' => $account->id]);
 
-        factory(Contact::class, 100)
-            ->create(['account_id' => $account->id])
-            ->each(function ($contact) use ($organizations) {
-                $contact->update(['organization_id' => $organizations->random()->id]);
-            });
+        
     }
 }
