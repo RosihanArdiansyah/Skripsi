@@ -19,7 +19,7 @@
       <table class="grid md:grid-cols-3 justify-items-center">
         <tr v-for="doc in docs.data" :key="doc.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td>
-              <div class="card m-4 text-center justify-items-center">
+              <div class="m-4 text-center justify-items-center">
                 <img v-if="doc.coverImg" class="flex self-center h-360 w-360" :src="doc.coverImg" />
                   <inertia-link class="px-6 py-4 flex items-center hover:underline focus:text-indigo-500" :href="route('docs.edit', doc.id)">
                     {{ doc.docs_name }}

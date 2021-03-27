@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 use League\Glide\Server;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class Docs extends Model
 {
@@ -15,6 +17,15 @@ class Docs extends Model
     {
         if ($this->cover) {
             return URL::to(App::make(Server::class)->fromPath($this->cover, $attributes));
+        }
+    }
+
+     public function filesUrl()
+    {
+        if ($this->files) {
+            $filename = Storage::path($this->files);
+            return Storage::url($this->files,[
+                'Content-Disposition' => 'inline;']);
         }
     }
 

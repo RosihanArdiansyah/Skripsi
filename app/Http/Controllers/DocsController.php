@@ -6,7 +6,9 @@ use App\Models\Docs;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class DocsController extends Controller
@@ -49,8 +51,8 @@ class DocsController extends Controller
      
         Auth::user()->account->docs()->create([
             'docs_name' => Request::get('docs_name'),
-            'cover' => Request::file('coverImg') ? Request::file('coverImg')->storeAs('docs',$imgName) : null,
-            'files' => Request::file('pdf') ? Request::file('pdf')->storeAs('docs',$docName) : null,
+            'cover' => Request::file('coverImg') ? Request::file('coverImg')->storePubliclyAs('docs',$imgName) : null,
+            'files' => Request::file('pdf') ? Request::file('pdf')->storePubliclyAs('docs',$docName) : null,
         ]);
 
         return Redirect::route('docs')->with('success', 'doc created.');
@@ -64,17 +66,19 @@ class DocsController extends Controller
                 'docs_name' => $doc->docs_name,
                 'deleted_at' => $doc->deleted_at,
                 'coverImg' => $doc->coverUrl(['w' => 60, 'h' => 60, 'fit' => 'crop']),
+                'filePdf' => $doc->files,
             ],
         ]);
     }
 
      public function show(Docs $doc)
     {
+        Storage::disk('local');
         return Inertia::render('Documents/Show', [
             'doc' => [
                 'id' => $doc->id,
                 'docs_name' => $doc->docs_name,
-                'filePdf' => $doc->files,
+                'filePdf' => $doc->filesUrl(),
             ],
         ]);
     }
@@ -93,11 +97,11 @@ class DocsController extends Controller
         $doc->update(Request::only('docs_name'));
 
         if (Request::file('coverImg')) {
-            $doc->update(['cover' => Request::file('coverImg') ? Request::file('coverImg')->storeAs('docs',$imgName) : null]) ;
+            $doc->update(['cover' => Request::file('coverImg') ? Request::file('coverImg')->storePubliclyAs('docs',$imgName) : null]) ;
         }
 
         if (Request::file('pdf')) {
-            $doc->update([ 'files' => Request::file('pdf') ? Request::file('pdf')->storeAs('docs',$docName) : null]) ;
+            $doc->update([ 'files' => Request::file('pdf') ? Request::file('pdf')->storePubliclyAs('public/docs',$docName) : null]) ;
         }
 
         return Redirect::back()->with('success', 'doc updated.');
