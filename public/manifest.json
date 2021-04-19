@@ -1,0 +1,27 @@
+{
+        "name": "Laravel PWA",
+        "short_name": "Laravel PWA",
+        "icons": [
+            {
+                  "src": "/images/icons/icon-192x192.png",
+                  "sizes": "192x192",
+                  "type": "image/png"
+                }
+        ],
+        "splash":[
+        	{
+                  "src": "/images/icons/splash-640x1136.png",
+                  "sizes": "640x1136",
+                  "type": "image/png"
+                }
+        ],
+        "start_url": "/",
+        "scope": ".",
+        "display": "standalone",
+        "background_color": "#ffffff",
+        "theme_color": "#000",
+        "description": "Testing",
+        "orientation" : "any",
+        "dir": "ltr",
+        "lang": "en-US"
+}

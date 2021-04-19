@@ -13,17 +13,9 @@ class Docs extends Model
 {
     use SoftDeletes;
 
-    public function coverUrl(array $attributes)
-    {
-        if ($this->cover) {
-            return URL::to(App::make(Server::class)->fromPath($this->cover, $attributes));
-        }
-    }
-
      public function filesUrl()
     {
         if ($this->files) {
-            $filename = Storage::path($this->files);
             return Storage::url($this->files,[
                 'Content-Disposition' => 'inline;']);
         }

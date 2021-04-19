@@ -2,8 +2,6 @@
   <div>
     <div class="mb-8 flex justify-start max-w-3xl">
       <h1 class="mb-8 font-bold text-3xl">
-        <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('docs')">docs</inertia-link>
-        <span class="text-indigo-400 font-medium">/</span>
         {{ form.docs_name }}
       </h1>
       <img v-if="doc.coverImg" class="block w-8 h-8 rounded-full ml-4" :src="doc.coverImg" />
@@ -15,7 +13,8 @@
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
-          <file-input v-model="form.coverImg" :error="form.errors.coverImg" class="pr-6 pb-8 w-full lg:w-1/2" type="file" accept="image/*" label="Cover" />
+          <text-input v-model="form.author" :error="form.errors.author" class="pr-6 pb-8 w-full lg:w-1/2" label="Author" />
+          <text-input v-model="form.department" :error="form.errors.department" class="pr-6 pb-8 w-full lg:w-1/2" label="Department" />
           <file-input v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full lg:w-1/2" type="file" accept=".pdf" label="Files" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
@@ -58,7 +57,8 @@ export default {
       form: this.$inertia.form({
         _method:'put',
         docs_name: this.doc.docs_name,
-        coverImg : null,
+        author:this.doc.author,
+        department:this.doc.department,
         pdf: null
       }),
     }

@@ -26,8 +26,9 @@ class DocsController extends Controller
                     return [
                         'id' => $docs->id,
                         'docs_name' => $docs->docs_name,
+                        'author'=>$docs->author,
+                        'department'=>$docs->department,
                         'deleted_at' => $docs->deleted_at,
-                        'coverImg' => $docs->coverUrl(['w' => 100, 'h' => 160, 'center']),
                         'pdf'=> $docs->files,
                     ];
                 }),
@@ -41,17 +42,18 @@ class DocsController extends Controller
 
     public function store()
     {
-        $imgName = Request::file('coverImg')->getClientOriginalName();
         $docName = Request::file('pdf')->getClientOriginalName();
         Request::validate([
                 'docs_name' => ['required', 'max:100'],
-                'coverImg' => ['nullable', 'image'],
+                'author' => ['required', 'max:100'],
+                'department' => ['required', 'max:100'],
                 'pdf' => ['nullable', 'file'],
         ]);
      
         Auth::user()->account->docs()->create([
             'docs_name' => Request::get('docs_name'),
-            'cover' => Request::file('coverImg') ? Request::file('coverImg')->storePubliclyAs('docs',$imgName) : null,
+            'author' => Request::get('author'),
+            'department' => Request::get('department'),
             'files' => Request::file('pdf') ? Request::file('pdf')->storePubliclyAs('docs',$docName) : null,
         ]);
 
@@ -64,17 +66,18 @@ class DocsController extends Controller
             'doc' => [
                 'id' => $doc->id,
                 'docs_name' => $doc->docs_name,
+                'author'=>$doc->author,
+                'department'=>$doc->department,
                 'deleted_at' => $doc->deleted_at,
-                'coverImg' => $doc->coverUrl(['w' => 60, 'h' => 60, 'fit' => 'crop']),
                 'filePdf' => $doc->files,
             ],
         ]);
     }
 
-     public function show(Docs $doc)
+      public function show(Docs $doc)
     {
         Storage::disk('local');
-        return Inertia::render('Documents/Show', [
+        return Inertia::render('Documents/PDFViewer', [
             'doc' => [
                 'id' => $doc->id,
                 'docs_name' => $doc->docs_name,
@@ -85,20 +88,16 @@ class DocsController extends Controller
 
     public function update(Docs $doc)
     {
-        $imgName = Request::file('coverImg')->getClientOriginalName();
         $docName = Request::file('pdf')->getClientOriginalName();
 
         Request::validate([
              'docs_name' => ['required', 'max:100'],
-             'coverImg' => ['nullable', 'image'],
+             'author' => ['required', 'max:100'],
+             'department' => ['required', 'max:100'],
              'pdf' => ['nullable', 'file'],
         ]);
 
-        $doc->update(Request::only('docs_name'));
-
-        if (Request::file('coverImg')) {
-            $doc->update(['cover' => Request::file('coverImg') ? Request::file('coverImg')->storePubliclyAs('docs',$imgName) : null]) ;
-        }
+        $doc->update(Request::only('docs_name','author','department'));
 
         if (Request::file('pdf')) {
             $doc->update([ 'files' => Request::file('pdf') ? Request::file('pdf')->storePubliclyAs('public/docs',$docName) : null]) ;
