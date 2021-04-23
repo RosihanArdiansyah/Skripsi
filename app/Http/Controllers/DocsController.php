@@ -42,13 +42,15 @@ class DocsController extends Controller
 
     public function store()
     {
-        $docName = Request::file('pdf')->getClientOriginalName();
+        
         Request::validate([
                 'docs_name' => ['required', 'max:100'],
                 'author' => ['required', 'max:100'],
                 'department' => ['required', 'max:100'],
                 'pdf' => ['nullable', 'file'],
         ]);
+
+        $docName = Request::file('pdf')->getClientOriginalName();
      
         Auth::user()->account->docs()->create([
             'docs_name' => Request::get('docs_name'),
@@ -88,7 +90,7 @@ class DocsController extends Controller
 
     public function update(Docs $doc)
     {
-        $docName = Request::file('pdf')->getClientOriginalName();
+        
 
         Request::validate([
              'docs_name' => ['required', 'max:100'],
@@ -97,9 +99,13 @@ class DocsController extends Controller
              'pdf' => ['nullable', 'file'],
         ]);
 
+
+
         $doc->update(Request::only('docs_name','author','department'));
 
         if (Request::file('pdf')) {
+            $docName = Request::file('pdf')->getClientOriginalName();
+            
             $doc->update([ 'files' => Request::file('pdf') ? Request::file('pdf')->storePubliclyAs('public/docs',$docName) : null]) ;
         }
 

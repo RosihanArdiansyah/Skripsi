@@ -16,14 +16,14 @@
       </inertia-link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
-      <table class="w-full whitespace-nowrap">
+      <table class="w-full table-fixed whitespace-normal break-all lg:break-words">
         <tr class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4">Nama</th>
-          <th class="px-6 pt-6 pb-4">Pengarang</th>
+          <th class="w-1/3 px-6 pt-6 pb-4">Nama</th>
+          <th class="w-1/4 px-6 pt-6 pb-4">Pengarang</th>
           <th class="px-6 pt-6 pb-4" >Department</th>
         </tr>
         <tr v-for="doc in docs.data" :key="doc.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-         <td class="border-t">
+         <td class="w-32 break-words border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('docs.edit', doc.id)">
               {{ doc.docs_name }}
               <icon v-if="doc.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
@@ -40,7 +40,7 @@
             </inertia-link>
           </td>
           <td class="border-t">
-               <inertia-link v-if="doc.pdf" class="inline-block align-middle text-white-600 btn-indigo" as="button" type="button" :href="route('docs.show', doc.id)">Read</inertia-link>
+               <inertia-link v-if="doc.pdf" class="inline-block align-middle text-white-600 btn-indigo" as="button" tabindex="-1"type="button" :href="route('docs.show', doc.id)">Read</inertia-link>
           </td>
         </tr>
         <tr v-if="docs.data.length === 0">
@@ -48,7 +48,6 @@
         </tr>
       </table>
     </div>
-    <pagination class="mt-6" :links="docs.links" />
   </div>
 </template>
 
@@ -58,14 +57,12 @@ import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
 import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
-import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
 
 export default {
-  metaInfo: { title: 'docs' },
+  metaInfo: { title: 'Docs' },
   components: {
     Icon,
-    Pagination,
     SearchFilter,
   },
   layout: Layout,
@@ -93,10 +90,7 @@ export default {
   methods: {
     reset() {
       this.form = mapValues(this.form, () => null)
-    },
-    show(){
-      this.route('docs.show',this.doc.id)
-    },
+    }
   },
 }
 </script>
