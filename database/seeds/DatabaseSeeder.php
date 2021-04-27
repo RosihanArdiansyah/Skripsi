@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
 
         factory(User::class, 5)->create(['account_id' => $account->id]);
 
+        factory(Docs::class, 100)
+            ->create(['account_id' => $account->id]);
+
         
     }
 }

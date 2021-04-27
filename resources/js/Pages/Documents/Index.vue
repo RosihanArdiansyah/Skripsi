@@ -16,6 +16,7 @@
       </inertia-link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
+<<<<<<< HEAD
       <table class="w-full table-fixed whitespace-normal break-all lg:break-words">
         <tr class="text-left font-bold">
           <th class="w-1/3 px-6 pt-6 pb-4">Nama</th>
@@ -41,6 +42,19 @@
           </td>
           <td class="border-t">
                <inertia-link v-if="doc.pdf" class="inline-block align-middle text-white-600 btn-indigo" as="button" tabindex="-1"type="button" :href="route('docs.show', doc.id)">Read</inertia-link>
+=======
+      <table class="grid md:grid-cols-3 justify-items-center">
+        <tr v-for="doc in docs.data" :key="doc.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
+          <td>
+              <div class="m-4 text-center justify-items-center">
+                <img v-if="doc.coverImg" class="flex self-center h-360 w-360" :src="doc.coverImg" />
+                  <inertia-link class="px-6 py-4 flex items-center hover:underline focus:text-indigo-500" :href="route('docs.edit', doc.id)">
+                    {{ doc.docs_name }}
+                    <icon v-if="doc.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
+                  </inertia-link>
+                <inertia-link v-if="doc.pdf" class="inline-block align-middle text-white-600 btn-indigo" as="button" type="button" :href="route('docs.show', doc.id)">Read</inertia-link>
+              </div>
+>>>>>>> parent of 469fef5 (pwa n pdf reader)
           </td>
         </tr>
         <tr v-if="docs.data.length === 0">

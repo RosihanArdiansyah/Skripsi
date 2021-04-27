@@ -17,8 +17,6 @@ class CreateDocsTable extends Migration
             $table->increments('id');
             $table->integer('account_id')->index();
             $table->string('docs_name', 100);
-            $table->string('author', 100);
-            $table->string('department', 100);
             $table->string('cover', 100)->nullable();
             $table->string('files', 100)->nullable();
             $table->timestamps();
