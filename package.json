@@ -33,6 +33,6 @@
     },
     "devDependencies": {
         "copy-webpack-plugin": "^8.0.0",
-        "pdfjs-dist": "^2.6.347"
+        "pdfjs-dist": "^2.0.943"
     }
 }
