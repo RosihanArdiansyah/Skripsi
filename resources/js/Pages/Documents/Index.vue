@@ -92,5 +92,8 @@ export default {
       this.form = mapValues(this.form, () => null)
     }
   },
+  mounted(){
+      this.form = mapValues(this.form, () => null)
+  },
 }
 </script>

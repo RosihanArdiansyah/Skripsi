@@ -95,7 +95,10 @@ export default {
   methods: {
     reset() {
       this.form = mapValues(this.form, () => null)
-    },
+    }
+  },
+  mounted(){
+      this.form = mapValues(this.form, () => null)
   },
 }
 </script>
