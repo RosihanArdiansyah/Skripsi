@@ -28,6 +28,8 @@ class DocsController extends Controller
                         'docs_name' => $docs->docs_name,
                         'author'=>$docs->author,
                         'department'=>$docs->department,
+                        'NIM'=>$docs->NIM,
+                        'year'=>$docs->year,
                         'deleted_at' => $docs->deleted_at,
                         'pdf'=> $docs->files,
                     ];
@@ -46,6 +48,8 @@ class DocsController extends Controller
         Request::validate([
                 'docs_name' => ['required', 'max:100'],
                 'author' => ['required', 'max:100'],
+                'NIM' => ['required', 'max:100'],
+                'year' => ['required', 'max:4'],
                 'department' => ['required', 'max:100'],
                 'pdf' => ['nullable', 'file'],
         ]);
@@ -57,6 +61,8 @@ class DocsController extends Controller
         Auth::user()->account->docs()->create([
             'docs_name' => Request::get('docs_name'),
             'author' => Request::get('author'),
+            'NIM' => Request::get('NIM'),
+            'year' => Request::get('year'),
             'department' => Request::get('department'),
             'files' => Request::file('pdf') ? Request::file('pdf')->storePubliclyAs('docs',$docName) : null,
         ]);
@@ -72,8 +78,10 @@ class DocsController extends Controller
                 'docs_name' => $doc->docs_name,
                 'author'=>$doc->author,
                 'department'=>$doc->department,
+                'NIM'=>$doc->NIM,
+                'year'=>$doc->year,
                 'deleted_at' => $doc->deleted_at,
-                'filePdf' => $doc->files,
+                'pdf'=> $doc->files,
             ],
         ]);
     }
@@ -95,15 +103,17 @@ class DocsController extends Controller
         
 
         Request::validate([
-             'docs_name' => ['required', 'max:100'],
-             'author' => ['required', 'max:100'],
-             'department' => ['required', 'max:100'],
-             'pdf' => ['nullable', 'file'],
+            'docs_name' => ['required', 'max:100'],
+            'author' => ['required', 'max:100'],
+            'NIM' => ['required', 'max:100'],
+            'year' => ['required', 'max:4'],
+            'department' => ['required', 'max:100'],
+            'pdf' => ['nullable', 'file'],
         ]);
 
 
 
-        $doc->update(Request::only('docs_name','author','department'));
+        $doc->update(Request::only('docs_name','author','department','NIM','year'));
 
         if (Request::file('pdf')) {
             $docName = Request::file('pdf')->getClientOriginalName();

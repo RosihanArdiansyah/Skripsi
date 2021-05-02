@@ -9,6 +9,8 @@
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full" label="Name" />
           <text-input v-model="form.author" :error="form.errors.author" class="pr-6 pb-8 w-full" label="Author" />
+          <text-input v-model="form.NIM" :error="form.errors.NIM" class="pr-6 pb-8 w-full" label="Stambuk" />
+          <num-input v-model="form.year" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Year" />
           <text-input v-model="form.department" :error="form.errors.department" class="pr-6 pb-8 w-full" label="Department" />
           <file-input v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full" type="file" accept=".pdf" label="Files" />
         </div>
@@ -24,6 +26,7 @@
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
 import FileInput from '@/Shared/FileInput'
+import NumInput from '@/Shared/NumInput'
 import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
@@ -34,6 +37,7 @@ export default {
     FileInput,
     SelectInput,
     TextInput,
+    NumInput,
   },
   layout: Layout,
   remember: 'form',
@@ -42,6 +46,8 @@ export default {
       form: this.$inertia.form({
         docs_name: null,
         author:null,
+        NIM:null,
+        year:null,
         department:null,
         pdf:null,
       }),

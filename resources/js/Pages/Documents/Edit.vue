@@ -2,9 +2,7 @@
   <div>
     <div class="mb-8 flex justify-start max-w-3xl">
       <h1 class="mb-8 font-bold text-3xl">
-        <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('docs')">docs</inertia-link>
-        <span class="text-indigo-400 font-medium">/</span>
-        {{ form.docs_name }}
+        <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('docs')">{{ form.docs_name }}</inertia-link>
       </h1>
       <img v-if="doc.coverImg" class="block w-8 h-8 rounded-full ml-4" :src="doc.coverImg" />
     </div>
@@ -15,7 +13,10 @@
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <text-input v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full" label="Name" />
-          <file-input v-model="form.coverImg" :error="form.errors.coverImg" class="pr-6 pb-8 w-full" type="file" accept="image/*" label="Cover" />
+          <text-input v-model="form.author" :error="form.errors.author" class="pr-6 pb-8 w-full" label="Author" />
+          <text-input v-model="form.NIM" :error="form.errors.NIM" class="pr-6 pb-8 w-full" label="Stambuk" />
+          <num-input v-model="form.year" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Year" />
+          <text-input v-model="form.department" :error="form.errors.department" class="pr-6 pb-8 w-full" label="Department" />
           <file-input v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full" type="file" accept=".pdf" label="Files" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
@@ -31,6 +32,7 @@
 import Icon from '@/Shared/Icon'
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
+import NumInput from '@/Shared/NumInput'
 import FileInput from '@/Shared/FileInput'
 import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
@@ -46,6 +48,7 @@ export default {
     LoadingButton,
     SelectInput,
     TextInput,
+    NumInput,
     TrashedMessage,
   },
   layout: Layout,
@@ -58,8 +61,11 @@ export default {
       form: this.$inertia.form({
         _method:'put',
         docs_name: this.doc.docs_name,
-        coverImg : null,
-        pdf: null
+        author:this.doc.author,
+        NIM:this.doc.NIM,
+        year:this.doc.year,
+        department:this.doc.department,
+        pdf: this.doc.pdf
       }),
     }
   },
