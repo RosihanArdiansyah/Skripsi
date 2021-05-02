@@ -14,9 +14,9 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
-          <file-input v-model="form.coverImg" :error="form.errors.coverImg" class="pr-6 pb-8 w-full lg:w-1/2" type="file" accept="image/*" label="Cover" />
-          <file-input v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full lg:w-1/2" type="file" accept=".pdf" label="Files" />
+          <text-input v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full" label="Name" />
+          <file-input v-model="form.coverImg" :error="form.errors.coverImg" class="pr-6 pb-8 w-full" type="file" accept="image/*" label="Cover" />
+          <file-input v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full" type="file" accept=".pdf" label="Files" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!doc.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete docs</button>

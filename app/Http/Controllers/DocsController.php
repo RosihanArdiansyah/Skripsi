@@ -50,7 +50,9 @@ class DocsController extends Controller
                 'pdf' => ['nullable', 'file'],
         ]);
 
-        $docName = Request::file('pdf')->getClientOriginalName();
+        if (Request::file('pdf')) {
+            $docName = Request::file('pdf')->getClientOriginalName();
+        }
      
         Auth::user()->account->docs()->create([
             'docs_name' => Request::get('docs_name'),

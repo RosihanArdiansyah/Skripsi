@@ -7,9 +7,10 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="store">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full lg:w-1/2" label="Name" />
-          <file-input v-model="form.coverImg" :error="form.errors.coverImg" class="pr-6 pb-8 w-full lg:w-1/2" type="file" accept="image/*" label="Cover" />
-          <file-input v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full lg:w-1/2" type="file" accept=".pdf" label="Files" />
+          <text-input v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full" label="Name" />
+          <text-input v-model="form.author" :error="form.errors.author" class="pr-6 pb-8 w-full" label="Author" />
+          <text-input v-model="form.department" :error="form.errors.department" class="pr-6 pb-8 w-full" label="Department" />
+          <file-input v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full" type="file" accept=".pdf" label="Files" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Documents</loading-button>
@@ -40,7 +41,8 @@ export default {
     return {
       form: this.$inertia.form({
         docs_name: null,
-        coverImg: null,
+        author:null,
+        department:null,
         pdf:null,
       }),
     }

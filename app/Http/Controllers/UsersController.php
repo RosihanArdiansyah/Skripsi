@@ -50,7 +50,9 @@ class UsersController extends Controller
             'photo' => ['nullable', 'image'],
         ]);
 
-        $name = Request::file('photo')->getClientOriginalName();
+        if (Request::file('photo')) {
+            $name = Request::file('photo')->getClientOriginalName();
+        }
 
         Auth::user()->account->users()->create([
             'first_name' => Request::get('first_name'),
