@@ -13,9 +13,36 @@ use Inertia\Inertia;
 
 class DocsController extends Controller
 {
-     public function index()
+    public function index()
     {
-     return Inertia::render('Documents/Index', [
+    return Inertia::render('Documents/Index', [
+            'page' => Docs::paginate(5),
+            'filters' => Request::all('search', 'trashed'),
+            'docs' => Auth::user()->account->docs()
+                ->orderBy('docs_name')
+                ->filter(Request::only('search', 'trashed'))
+                ->paginate(5)
+                ->withQueryString()
+                ->through(function ($docs) {
+                    return [
+                        'id' => $docs->id,
+                        'docs_name' => $docs->docs_name,
+                        'author'=>$docs->author,
+                        'department'=>$docs->department,
+                        'NIM'=>$docs->NIM,
+                        'year'=>$docs->year,
+                        'deleted_at' => $docs->deleted_at,
+                        'pdf'=> $docs->files,
+                    ];
+                }),
+        ]);
+    }
+
+    public function searchIndex($doc)
+    {
+    return Inertia::render('Documents/Index', [
+            'page' => Docs::paginate(5),
+            'src' => ['val' => $doc],
             'filters' => Request::all('search', 'trashed'),
             'docs' => Auth::user()->account->docs()
                 ->orderBy('docs_name')

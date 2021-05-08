@@ -52,6 +52,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         $query->orderBy('last_name')->orderBy('first_name');
     }
 
+    public function scopeCountUser($query)
+    {
+        $query->orderBy('last_name')->orderBy('first_name');
+    }
+
     public function scopeWhereRole($query, $role)
     {
         switch ($role) {

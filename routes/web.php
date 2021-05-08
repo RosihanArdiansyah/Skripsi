@@ -38,7 +38,7 @@ Route::post('logout', [LoginController::class, 'logout'])
 
 Route::get('/', [DashboardController::class, 'index'])
     ->name('dashboard')
-    ->middleware('auth');
+    ->middleware('remember','auth');
 
 // Users
 
@@ -75,6 +75,10 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
 Route::get('docs', [DocsController::class, 'index'])
     ->name('docs')
     ->middleware('remember', 'auth');
+
+Route::get('docs/{doc}/searchIndex', [DocsController::class, 'searchIndex'])
+    ->name('docs.search')
+    ->middleware('auth');
 
 Route::get('docs/create', [DocsController::class, 'create'])
     ->name('docs.create')

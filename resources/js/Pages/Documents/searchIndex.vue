@@ -54,10 +54,7 @@
         </tr>
       </table>
     </div>
-    <keep-alive>
-        <pagination class="mt-6" :links="docs.links" />
-    </keep-alive>
-    
+    <pagination class="mt-6" :links="docs.links" />
   </div>
 </template>
 
@@ -82,9 +79,7 @@ export default {
   layout: Layout,
   props: {
     docs: Object,
-    filters: Object,
-    page: Object,
-    src: Object
+    filters: Object
   },
   data() {
     return {
@@ -105,7 +100,7 @@ export default {
   },
   methods: {
     reset() {
-      this.form = mapValues(this.form, (search) => null)
+      this.form = mapValues(this.form, () => null)
     },
     destroy() {
       if (confirm('Are you sure you want to delete this docs?')) {
@@ -113,12 +108,10 @@ export default {
       }
     }
   },
-  created(){
-    if (this.src != null){
-      this.form.search = this.src.val
-    } else {
-      this.form.search = null
-    }
+  mounted(){
+    this.form = mapValues(this.form, (search) => this.form.search)
+     console.log(this.form.search)
+     console.log(this.route)
   }
 
 }
