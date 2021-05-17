@@ -73,7 +73,7 @@ class DocsController extends Controller
     {
         
         Request::validate([
-                'docs_name' => ['required', 'max:100'],
+                'docs_name' => ['required', 'max:256'],
                 'author' => ['required', 'max:100'],
                 'NIM' => ['required', 'max:100'],
                 'year' => ['required', 'max:4'],
@@ -130,7 +130,7 @@ class DocsController extends Controller
         
 
         Request::validate([
-            'docs_name' => ['required', 'max:100'],
+            'docs_name' => ['required', 'max:256'],
             'author' => ['required', 'max:100'],
             'NIM' => ['required', 'max:100'],
             'year' => ['required', 'max:4'],

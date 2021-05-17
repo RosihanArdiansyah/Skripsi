@@ -7,7 +7,7 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="store">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <text-input v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full" label="Name" />
+          <textarea-input v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full" label="Name" type="text" />
           <text-input v-model="form.author" :error="form.errors.author" class="pr-6 pb-8 w-full" label="Author" />
           <text-input v-model="form.NIM" :error="form.errors.NIM" class="pr-6 pb-8 w-full" label="Stambuk" />
           <num-input v-model="form.year" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Year" />
@@ -25,6 +25,7 @@
 <script>
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
+import TextareaInput from '@/Shared/TextareaInput'
 import FileInput from '@/Shared/FileInput'
 import NumInput from '@/Shared/NumInput'
 import SelectInput from '@/Shared/SelectInput'
@@ -37,6 +38,7 @@ export default {
     FileInput,
     SelectInput,
     TextInput,
+    TextareaInput,
     NumInput,
   },
   layout: Layout,

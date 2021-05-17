@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     reset() {
-      this.form = mapValues(this.form, (search) => null)
+      this.form = mapValues(this.form, () => null)
     },
     destroy() {
       if (confirm('Are you sure you want to delete this docs?')) {
@@ -116,9 +116,7 @@ export default {
   created(){
     if (this.src != null){
       this.form.search = this.src.val
-    } else {
-      this.form.search = null
-    }
+    }  
   }
 
 }
