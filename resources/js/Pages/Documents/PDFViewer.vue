@@ -1,6 +1,8 @@
 <template>
   <div id="pageContainer">
-    <div id="viewer" class="pdfViewer"></div>
+    <!-- <div id="viewer" class="pdfViewer"></div> -->
+    <!-- <canvas id="the-canvas"></canvas> -->
+    <div id="container"></div>
   </div>
 </template>
 
@@ -18,7 +20,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 
 export default {
   name: "PdfViewer",
-  mounted() {
+  mounted() { 
     this.getPdf();
   },
   components: {
@@ -30,13 +32,89 @@ export default {
   },
   methods: {
     async getPdf() {
-      let container = document.getElementById("pageContainer");
+      /*let container = document.getElementById("pageContainer");
       let pdfViewer = new PDFViewer({
         container: container
-      });
+      });*/
       let loadingTask = pdfjsLib.getDocument(this.doc.filePdf);
-      let pdf = await loadingTask.promise;
-      pdfViewer.setDocument(pdf);
+      /*let pdf = await loadingTask.promise;
+      pdfViewer.setDocument(pdf);*/
+
+      /*loadingTask
+      .then(function(pdf) {
+        return pdf.getPage(1);
+      })
+      .then(function(page) {
+        // Set scale (zoom) level
+        var scale = 1.5;
+
+        // Get viewport (dimensions)
+        var viewport = page.getViewport(scale);
+
+        // Get canvas#the-canvas
+        var canvas = document.getElementById('the-canvas');
+
+        // Fetch canvas' 2d context
+        var context = canvas.getContext('2d');
+
+        // Set dimensions to Canvas
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        // Prepare object needed by render method
+        var renderContext = {
+          canvasContext: context,
+          viewport: viewport
+        };
+
+        // Render PDF page
+        page.render(renderContext);
+      });*/
+      
+      loadingTask
+      .then(function(pdf) {
+        // Get div#container and cache it for later use
+        var container = document.getElementById("container");
+
+        // Loop from 1 to total_number_of_pages in PDF document
+        for (var i = 1; i <= 10; i++) {
+            // Get desired page
+            pdf.getPage(i).then(function(page) {
+
+              var scale = 1.5;
+              var viewport = page.getViewport(scale);
+              var div = document.createElement("div");
+
+              // Set id attribute with page-#{pdf_page_number} format
+              div.setAttribute("id", "page-" + (page.pageIndex + 1));
+
+              // This will keep positions of child elements as per our needs
+              div.setAttribute("style", "position: relative");
+
+              // Append div within div#container
+              container.appendChild(div);
+
+              // Create a new Canvas element
+              var canvas = document.createElement("canvas");
+
+              // Append Canvas within div#page-#{pdf_page_number}
+              div.appendChild(canvas);
+              div.appendChild(document.createElement("br"));
+
+              var context = canvas.getContext('2d');
+              canvas.height = viewport.height;
+              canvas.width = viewport.width;
+
+              var renderContext = {
+                canvasContext: context,
+                viewport: viewport
+              };
+
+              // Render PDF page
+              page.render(renderContext);
+            });
+          }
+      });
     }
   }
 };
