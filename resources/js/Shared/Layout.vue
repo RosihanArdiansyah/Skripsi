@@ -8,7 +8,7 @@
             <inertia-link class="mt-1" href="/">
               <span class="text-white">E-Library</span>
             </inertia-link>
-            <dropdown aria-label="btnDrop" class="md:hidden" placement="bottom-end">
+            <dropdown class="md:hidden" placement="bottom-end">
               <svg class="fill-white w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
               <div slot="dropdown" class="mt-2 px-8 py-4 shadow-lg bg-red-800 rounded">
                 <main-menu />

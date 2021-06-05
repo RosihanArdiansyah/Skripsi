@@ -7,8 +7,7 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production",
-        "generate-sw": "workbox injectManifest workbox-config.js"
+        "production": "mix --production"
     },
     "dependencies": {
         "@inertiajs/inertia": "^0.8.5",
@@ -28,8 +27,7 @@
         "vue": "^2.6.11",
         "vue-loader": "^15.9.6",
         "vue-meta": "^2.3.1",
-        "vue-template-compiler": "^2.6.12",
-        "workbox-cli": "^4.3.1"
+        "vue-template-compiler": "^2.6.12"
     },
     "devDependencies": {
         "pdfjs-dist": "^2.0.943"

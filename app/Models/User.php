@@ -40,7 +40,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         if ($this->photo_path) {
             return URL::to(App::make(Server::class)->fromPath($this->photo_path, $attributes));
         }
-    } 
+    }
 
     public function isDemoUser()
     {
