@@ -11,6 +11,8 @@
     {{-- Ping CRM --}}
     <script src="https://polyfill.io/v3/polyfill.min.js?features=String.prototype.startsWith" defer></script>
 
+    <link rel=preconnect>
+
     <script src="{{ mix('/js/app.js') }}" defer>
     </script>
     @routes
