@@ -28,6 +28,7 @@ import TextInput from '@/Shared/TextInput'
 import TextareaInput from '@/Shared/TextareaInput'
 import FileInput from '@/Shared/FileInput'
 import NumInput from '@/Shared/NumInput'
+import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 
 export default {
@@ -35,6 +36,7 @@ export default {
   components: {
     LoadingButton,
     FileInput,
+    SelectInput,
     TextInput,
     TextareaInput,
     NumInput,

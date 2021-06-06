@@ -47,12 +47,12 @@
             </inertia-link>
           </td>
         </tr>
-        <tr v-if="users.length == 0">
-          <td class="border-t px-6 py-4" colspan="3">No users found.</td>
+        <tr v-if="users.length === 0">
+          <td class="border-t px-6 py-4" colspan="4">No users found.</td>
         </tr>
       </table>
     </div>
-    <pagination class="mt-6" :links="users.links" />
+     <pagination class="mt-6" :links="users.links" />
   </div>
 </template>
 
@@ -95,13 +95,13 @@ export default {
       deep: true,
     },
   },
-  mounted(){
-    this.form = mapValues(this.form, () => null)
-  },
   methods: {
     reset() {
       this.form = mapValues(this.form, () => null)
-    },
+    }
+  },
+  mounted(){
+      this.form = mapValues(this.form, () => null)
   },
 }
 </script>

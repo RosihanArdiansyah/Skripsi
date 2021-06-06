@@ -20,11 +20,11 @@
         <tr class="text-left font-bold">
           <th class="w-1/3 px-6 pt-6 pb-4">Nama</th>
           <th class="w-1/4 px-6 pt-6 pb-4">Pengarang</th>
-          <th class="w-1/4 px-6 pt-6 pb-4">Department</th>
-          <th class="w-1/10 px-6 pt-6 pb-4" />
+          <th class="w-1/4 px-6 pt-6 pb-4" >Department</th>
+          <th class="w-1/10 px-6 pt-6 pb-4" ></th>
         </tr>
         <tr v-for="doc in docs.data" :key="doc.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-          <td class="break-words border-t">
+         <td class="break-words border-t">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('docs.edit', doc.id)">
               {{ doc.docs_name }}
               <icon v-if="doc.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
@@ -41,7 +41,7 @@
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link v-if="doc.pdf" class="inline-block align-middle text-white-200 btn-indigo" as="button" tabindex="-1"type="button" :href="route('docs.show', doc.id)">Read</inertia-link>
+               <inertia-link v-if="doc.pdf" class="inline-block align-middle text-white-200 btn-indigo" as="button" tabindex="-1"type="button" :href="route('docs.show', doc.id)">Read</inertia-link>
           </td>
           <!--<td class="border-t">
                <inertia-link v-if="!doc.deleted_at" class="inline-block align-middle text-white-600 btn-green" as="button" tabindex="-1"type="button" href="#" @click="destroy">
@@ -55,8 +55,9 @@
       </table>
     </div>
     <keep-alive>
-      <pagination class="mt-6" :links="docs.links" />
+        <pagination class="mt-6" :links="docs.links" />
     </keep-alive>
+    
   </div>
 </template>
 
@@ -68,6 +69,7 @@ import throttle from 'lodash/throttle'
 import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
+import TrashedMessage from '@/Shared/TrashedMessage'
 
 export default {
   metaInfo: { title: 'Docs' },
@@ -75,13 +77,14 @@ export default {
     Icon,
     SearchFilter,
     Pagination,
+    TrashedMessage, 
   },
   layout: Layout,
   props: {
     docs: Object,
     filters: Object,
     page: Object,
-    src: Object,
+    src: Object
   },
   data() {
     return {
@@ -100,11 +103,6 @@ export default {
       deep: true,
     }, 
   },
-  created(){
-    if (this.src != null){
-      this.form.search = this.src.val
-    }  
-  },
   methods: {
     reset() {
       this.form = mapValues(this.form, () => null)
@@ -113,8 +111,13 @@ export default {
       if (confirm('Are you sure you want to delete this docs?')) {
         this.$inertia.delete(this.route('docs.destroy', this.doc.id))
       }
-    },
+    }
   },
+  created(){
+    if (this.src != null){
+      this.form.search = this.src.val
+    }  
+  }
 
 }
 </script>

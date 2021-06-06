@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div>
     <div class="mb-8 flex justify-start max-w-3xl">
       <h1 class="mb-8 font-bold text-3xl">
@@ -29,11 +29,13 @@
 </template>
 
 <script>
+import Icon from '@/Shared/Icon'
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
 import TextareaInput from '@/Shared/TextareaInput'
 import NumInput from '@/Shared/NumInput'
 import FileInput from '@/Shared/FileInput'
+import SelectInput from '@/Shared/SelectInput'
 import LoadingButton from '@/Shared/LoadingButton'
 import TrashedMessage from '@/Shared/TrashedMessage'
 
@@ -42,8 +44,10 @@ export default {
     return { title: this.form.docs_name }
   },
   components: {
+    Icon,
     FileInput,
     LoadingButton,
+    SelectInput,
     TextInput,
     TextareaInput,
     NumInput,
@@ -63,7 +67,7 @@ export default {
         NIM:this.doc.NIM,
         year:this.doc.year,
         department:this.doc.department,
-        pdf: null,
+        pdf: null
       }),
     }
   },
@@ -84,5 +88,5 @@ export default {
       }
     },
   },
-}
+};
 </script>
