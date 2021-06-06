@@ -1,12 +1,12 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
+        "dev": "npm run development && workbox injectManifest workbox-config.js",
         "development": "mix",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
-        "prod": "npm run production",
+        "prod": "npm run production && workbox injectManifest workbox-config.js",
         "production": "mix --production"
     },
     "dependencies": {
@@ -27,9 +27,12 @@
         "vue": "^2.6.11",
         "vue-loader": "^15.9.6",
         "vue-meta": "^2.3.1",
-        "vue-template-compiler": "^2.6.12"
+        "vue-template-compiler": "^2.6.12",
+        "workbox-cli": "^6.1.5"
+        
     },
     "devDependencies": {
         "pdfjs-dist": "^2.0.943"
     }
+    
 }

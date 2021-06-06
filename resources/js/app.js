@@ -14,6 +14,19 @@ InertiaProgress.init()
 
 const el = document.getElementById('app')
 
+// Initialize the service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/offline.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope)
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err)
+    })
+  })
+}
+
 new Vue({
   metaInfo: {
     titleTemplate: title => (title ? `${title} - E-Library` : 'E-Library'),
