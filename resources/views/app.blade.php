@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="manifest" href="/manifest.json" />
+    <html lang="en">
+    <meta name="theme-color" content="#7c4dff"/>
+    <meta name="description" content="Digital Library">
+    <link rel="apple-touch-icon" href="public/images/icons/icon-192x192.png">
 
     {{-- Inertia --}}
     <script src="https://polyfill.io/v3/polyfill.min.js?features=smoothscroll,NodeList.prototype.forEach,Promise,Object.values,Object.assign" defer></script>
