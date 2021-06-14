@@ -76,9 +76,11 @@ export default {
             // Get desired page
             pdf.getPage(i).then(function(page) {
 
-              var scale = 1.5
-              var viewport = page.getViewport(scale)
+              // var scale = 1.5
+              var viewport = page.getViewport(0.95)
               var div = document.createElement('div')
+              var scale = container.clientWidth / viewport.width
+              viewport = page.getViewport(scale)
 
               // Set id attribute with page-#{pdf_page_number} format
               div.setAttribute('id', 'page-' + (page.pageIndex + 1))
