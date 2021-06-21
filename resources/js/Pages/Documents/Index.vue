@@ -10,9 +10,9 @@
           <option value="only">Only Trashed</option>
         </select>
       </search-filter>
-      <inertia-link class="btn-indigo" :href="route('docs.create')">
-        <span>Create</span>
-        <span class="hidden md:inline">doc</span>
+      <inertia-link v-if="$page.props.auth.user.owner == 1" class="btn-indigo" :href="route('docs.create')">
+        <span>Tambah</span>
+        <span class="hidden md:inline">Dokumen</span>
       </inertia-link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
@@ -65,7 +65,7 @@ import Icon from '@/Shared/Icon'
 import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
 import throttle from 'lodash/throttle'
-import mapValues from 'lodash/mapValues'
+// import mapValues from 'lodash/mapValues'
 import Pagination from '@/Shared/Pagination'
 import SearchFilter from '@/Shared/SearchFilter'
 
@@ -103,11 +103,17 @@ export default {
   created(){
     if (this.src != null){
       this.form.search = this.src.val
-    }  
+    }
+    if(this.$page.props.auth.user.owner == 1){
+      this.form.trashed = 'with'
+      console.log(this.$page.props.auth.user.owner)
+    }
+    
+    
   },
   methods: {
     reset() {
-      this.form = mapValues(this.form, () => null)
+      this.form.search = null
     },
     destroy() {
       if (confirm('Are you sure you want to delete this docs?')) {

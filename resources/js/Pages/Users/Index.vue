@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="mb-8 font-bold text-3xl">Users</h1>
+    <h1 class="mb-8 font-bold text-3xl">Daftar User</h1>
     <div class="mb-6 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
         <label class="block text-gray-700">Role:</label>
@@ -17,7 +17,7 @@
         </select>
       </search-filter>
       <inertia-link class="btn-indigo" :href="route('users.create')">
-        <span>Create</span>
+        <span>Tambah</span>
         <span class="hidden md:inline">User</span>
       </inertia-link>
     </div>
@@ -62,7 +62,7 @@ import pickBy from 'lodash/pickBy'
 import Layout from '@/Shared/Layout'
 import throttle from 'lodash/throttle'
 import Pagination from '@/Shared/Pagination'
-import mapValues from 'lodash/mapValues'
+// import mapValues from 'lodash/mapValues'
 import SearchFilter from '@/Shared/SearchFilter'
 
 export default {
@@ -96,11 +96,13 @@ export default {
     },
   },
   mounted(){
-    this.form = mapValues(this.form, () => null)
+    this.form.search = null
+    this.form.role = 'user'
+    this.form.trashed = 'with'
   },
   methods: {
     reset() {
-      this.form = mapValues(this.form, () => null)
+      this.form.search = null
     },
   },
 }

@@ -9,7 +9,7 @@
       <img v-if="user.photo" class="block w-8 h-8 rounded-full ml-4" :src="user.photo" />
     </div>
     <trashed-message v-if="user.deleted_at" class="mb-6" @restore="restore">
-      This user has been deleted.
+      User ini telah dihapus.
     </trashed-message>
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
@@ -25,8 +25,8 @@
           <file-input v-model="form.photo" :error="form.errors.photo" class="pr-6 pb-8 w-full" type="file" accept="image/*" label="Photo" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
-          <button v-if="!user.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete User</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update User</loading-button>
+          <button v-if="!user.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Hapus User</button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Ubah User</loading-button>
         </div>
       </form>
     </div>
@@ -79,12 +79,12 @@ export default {
       })
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this user?')) {
+      if (confirm('Apakah anda ingin menghapus user ini?')) {
         this.$inertia.delete(this.route('users.destroy', this.user.id))
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this user?')) {
+      if (confirm('Apakah anda ingin mengembalikan user ini?')) {
         this.$inertia.put(this.route('users.restore', this.user.id))
       }
     },

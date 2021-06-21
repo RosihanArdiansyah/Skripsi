@@ -7,7 +7,7 @@
       <img v-if="doc.coverImg" class="block w-8 h-8 rounded-full ml-4" :src="doc.coverImg" />
     </div>
     <trashed-message v-if="doc.deleted_at" class="mb-6" @restore="restore">
-      This docs has been deleted.
+      Data telah dihapus.
     </trashed-message>
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
@@ -20,8 +20,8 @@
           <file-input v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full" type="file" accept=".pdf" label="Files" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
-          <button v-if="!doc.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Delete docs</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Update docs</loading-button>
+          <button v-if="!doc.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Hapus Entry</button>
+          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Ubah Entry</loading-button>
         </div>
       </form>
     </div>
@@ -74,12 +74,12 @@ export default {
       })
     },
     destroy() {
-      if (confirm('Are you sure you want to delete this docs?')) {
+      if (confirm('Apakah anda ingin menghapus dokumen ini?')) {
         this.$inertia.delete(this.route('docs.destroy', this.doc.id))
       }
     },
     restore() {
-      if (confirm('Are you sure you want to restore this docs?')) {
+      if (confirm('Apakah anda ingin mengembalikan dokumen ini?')) {
         this.$inertia.put(this.route('docs.restore', this.doc.id))
       }
     },
