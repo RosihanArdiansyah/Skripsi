@@ -81,8 +81,10 @@ class DocsController extends Controller
                 'pdf' => ['nullable', 'file'],
         ]);
 
+        $name = str_replace(' ','_',Request::get('author'));
+        $nim = Request::get('NIM');
         if (Request::file('pdf')) {
-            $docName = Request::file('pdf')->getClientOriginalName();
+            $docName = Request::file('pdf')->getClientOriginalExtension();
         }
      
         Auth::user()->account->docs()->create([
@@ -91,10 +93,10 @@ class DocsController extends Controller
             'NIM' => Request::get('NIM'),
             'year' => Request::get('year'),
             'department' => Request::get('department'),
-            'files' => Request::file('pdf') ? Request::file('pdf')->storePubliclyAs('docs',$docName) : null,
+            'files' => Request::file('pdf') ? Request::file('pdf')->storePubliclyAs('docs',$nim.'_'.$name.'.'.$docName) : null,
         ]);
 
-        return Redirect::route('docs')->with('success', 'doc created.');
+        return Redirect::route('docs')->with('success', 'Dokumen ditambahkan');
     }
 
     public function edit(Docs $doc)
@@ -138,30 +140,31 @@ class DocsController extends Controller
             'pdf' => ['nullable', 'file'],
         ]);
 
-
+        $name = str_replace(' ','_',Request::get('author'));
+        $nim = Request::get('NIM');
 
         $doc->update(Request::only('docs_name','author','department','NIM','year'));
 
         if (Request::file('pdf')) {
-            $docName = Request::file('pdf')->getClientOriginalName();
+            $docName = Request::file('pdf')->getClientOriginalExtension();
             
-            $doc->update([ 'files' => Request::file('pdf') ? Request::file('pdf')->storePubliclyAs('public/docs',$docName) : null]) ;
+            $doc->update([ 'files' => Request::file('pdf') ? Request::file('pdf')->storePubliclyAs('public/docs',$nim.'_'.$name.'.'.$docName) : null]) ;
         }
 
-        return Redirect::back()->with('success', 'doc updated.');
+        return Redirect::back()->with('success', 'Dokumen berhasil diubah.');
     }
 
     public function destroy(Docs $doc)
     {
         $doc->delete();
 
-        return Redirect::back()->with('success', 'doc deleted.');
+        return Redirect::back()->with('success', 'Dokumen dihapus.');
     }
 
     public function restore(Docs $doc)
     {
         $doc->restore();
 
-        return Redirect::back()->with('success', 'doc restored.');
+        return Redirect::back()->with('success', 'Dokumen dikembailkan.');
     } 
 }
