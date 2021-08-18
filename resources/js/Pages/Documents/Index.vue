@@ -41,7 +41,7 @@
             </inertia-link>
           </td>
           <td class="border-t">
-            <inertia-link v-if="doc.pdf" class="inline-block align-middle text-white-200 btn-indigo" as="button" tabindex="-1"type="button" :href="route('docs.show', doc.id)">Read</inertia-link>
+            <inertia-link v-if="doc.pdf" class="inline-block align-middle text-white-200 btn-indigo" as="button" tabindex="-1" type="button" :href="route('docs.show', doc.id)">Read</inertia-link>
           </td>
           <!--<td class="border-t">
                <inertia-link v-if="!doc.deleted_at" class="inline-block align-middle text-white-600 btn-green" as="button" tabindex="-1"type="button" href="#" @click="destroy">
