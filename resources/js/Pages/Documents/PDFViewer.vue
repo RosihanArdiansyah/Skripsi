@@ -72,7 +72,7 @@ export default {
           var container = document.getElementById('container')
 
           // Loop from 1 to total_number_of_pages in PDF document
-          for (var i = 1; i <= 10; i++) {
+          for (var i = 1; i <= 30; i++) {
             // Get desired page
             pdf.getPage(i).then(function(page) {
 

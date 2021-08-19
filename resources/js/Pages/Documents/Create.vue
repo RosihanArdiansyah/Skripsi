@@ -7,12 +7,13 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="store">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <textarea-input v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full" label="Name" type="text" />
-          <text-input v-model="form.author" :error="form.errors.author" class="pr-6 pb-8 w-full" label="Author" />
-          <text-input v-model="form.NIM" :error="form.errors.NIM" class="pr-6 pb-8 w-full" label="Stambuk" />
-          <num-input v-model="form.year" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Year" />
-          <text-input v-model="form.department" :error="form.errors.department" class="pr-6 pb-8 w-full" label="Department" />
-          <file-input v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full" type="file" accept=".pdf" label="Files" />
+          <textarea-input v-model="form.docs_name" autocomplete="off" :error="form.errors.docs_name" class="pr-6 pb-8 w-full" label="Judul Buku" type="text" />
+          <text-input v-model="form.author" autocomplete="off" :error="form.errors.author" class="pr-6 pb-8 w-full" label="Pengarang" />
+          <text-input v-model="form.book_code" autocomplete="off" :error="form.errors.book_code" class="pr-6 pb-8 w-full" label="Kode Buku" />
+          <text-input v-model="form.NIM" autocomplete="off" :error="form.errors.NIM" class="pr-6 pb-8 w-full" label="Stambuk" />
+          <num-input v-model="form.year" autocomplete="off" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Tahun" />
+          <text-input v-model="form.department" autocomplete="off" :error="form.errors.department" class="pr-6 pb-8 w-full" label="Departemen" />
+          <file-input v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full" type="file" accept=".pdf" label="File PDF" />
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex justify-end items-center">
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Create Documents</loading-button>
@@ -45,6 +46,7 @@ export default {
     return {
       form: this.$inertia.form({
         docs_name: null,
+        book_code:null,
         author:null,
         NIM:null,
         year:null,

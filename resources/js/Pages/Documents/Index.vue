@@ -16,11 +16,11 @@
       </inertia-link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
-      <table class="w-full table-fixed whitespace-normal break-all lg:break-words">
+      <table class="w-full table-fixed break-all md:break-words">
         <tr class="text-left font-bold">
-          <th class="w-1/3 px-6 pt-6 pb-4">Nama</th>
-          <th class="w-1/4 px-6 pt-6 pb-4">Pengarang</th>
-          <th class="w-1/4 px-6 pt-6 pb-4">Department</th>
+          <th class="w-1/2 px-6 pt-6 pb-4">Nama</th>
+          <th class="w-1/5 px-6 pt-6 pb-4">Pengarang</th>
+          <th class="w-1/5 px-6 pt-6 pb-4">Departemen</th>
           <th class="w-1/10 px-6 pt-6 pb-4" />
         </tr>
         <tr v-for="doc in docs.data" :key="doc.id" class="hover:bg-gray-100 focus-within:bg-gray-100">

@@ -74,6 +74,7 @@ class DocsController extends Controller
         
         Request::validate([
                 'docs_name' => ['required', 'max:256'],
+                'book_code' => ['nullable', 'max:100'],
                 'author' => ['required', 'max:100'],
                 'NIM' => ['required', 'max:100'],
                 'year' => ['required', 'max:4'],
@@ -89,6 +90,7 @@ class DocsController extends Controller
      
         Auth::user()->account->docs()->create([
             'docs_name' => Request::get('docs_name'),
+            'book_code' => Request::get('book_code'),
             'author' => Request::get('author'),
             'NIM' => Request::get('NIM'),
             'year' => Request::get('year'),
@@ -105,6 +107,7 @@ class DocsController extends Controller
             'doc' => [
                 'id' => $doc->id,
                 'docs_name' => $doc->docs_name,
+                'book_code' => $doc->book_code,
                 'author'=>$doc->author,
                 'department'=>$doc->department,
                 'NIM'=>$doc->NIM,
@@ -133,6 +136,7 @@ class DocsController extends Controller
 
         Request::validate([
             'docs_name' => ['required', 'max:256'],
+            'book_code' => ['nullable', 'max:100'],
             'author' => ['required', 'max:100'],
             'NIM' => ['required', 'max:100'],
             'year' => ['required', 'max:4'],
