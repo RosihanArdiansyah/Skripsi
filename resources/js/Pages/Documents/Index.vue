@@ -15,33 +15,35 @@
         <span class="hidden md:inline">Dokumen</span>
       </inertia-link>
     </div>
-    <div class="bg-white rounded-md shadow overflow-x-auto">
+    <div class="bg-white rounded-md shadow overflow-x">
       <table class="w-full table-fixed break-all md:break-words">
         <tr class="text-left font-bold">
-          <th class="w-1/2 px-6 pt-6 pb-4">Nama</th>
-          <th class="w-1/5 px-6 pt-6 pb-4">Pengarang</th>
-          <th class="w-1/5 px-6 pt-6 pb-4">Departemen</th>
-          <th class="w-1/10 px-6 pt-6 pb-4" />
+          <th class="w-1/2 px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600 hidden md:table-cell">Nama</th>
+          <th class="w-1/5 px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600 hidden md:table-cell">Pengarang</th>
+          <th class="w-1/5 px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600 hidden md:table-cell">Departemen</th>
+          <th class="w-1/10 px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600 hidden md:table-cell" />
         </tr>
-        <tr v-for="doc in docs.data" :key="doc.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
-          <td class="break-words border-t">
+        <tr v-for="doc in docs.data" :key="doc.id" class="hover:bg-gray-100 focus-within:bg-gray-100 
+        flex md:table-row flex-col md:flex-row border-4 md:border flex-wrap md:flex-no-wrap"
+        >
+          <td class="pt-4 md:pt-0 md:border-t break-words block md:table-cell relative md:static">
             <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('docs.edit', doc.id)">
               {{ doc.docs_name }}
               <icon v-if="doc.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
-          <td class="border-t">
+          <td class="border-t block md:table-cell relative md:static">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('docs.edit', doc.id)" tabindex="-1">
               {{ doc.author }}
             </inertia-link>
           </td>
-          <td class="border-t">
+          <td class="border-t block md:table-cell relative md:static">
             <inertia-link class="px-6 py-4 flex items-center" :href="route('docs.edit', doc.id)" tabindex="-1">
               {{ doc.department }}
             </inertia-link>
           </td>
-          <td class="border-t">
-            <inertia-link v-if="doc.pdf" class="inline-block align-middle text-white-200 btn-indigo" as="button" tabindex="-1" type="button" :href="route('docs.show', doc.id)">Read</inertia-link>
+          <td v-if="doc.pdf" class="px-6 md:px-0 py-4 pb-4 md:pb-0 border-t block md:table-cell relative md:static items-center">
+            <inertia-link class="items-center flex align-middle text-white-200 btn-indigo" as="button" tabindex="-1" type="button" :href="route('docs.show', doc.id)">Read</inertia-link>
           </td>
           <!--<td class="border-t">
                <inertia-link v-if="!doc.deleted_at" class="inline-block align-middle text-white-600 btn-green" as="button" tabindex="-1"type="button" href="#" @click="destroy">
