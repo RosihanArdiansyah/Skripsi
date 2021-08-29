@@ -21,6 +21,16 @@ class Docs extends Model
         }
     }
 
+    public function docsReports()
+    {
+        return $this->hasMany(Reports::class);
+    }
+
+    public function typeDocs()
+    {
+        return $this->belongsTo(Types::class);
+    }
+
 
      public function scopeFilter($query, array $filters)
     {

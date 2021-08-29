@@ -28,6 +28,7 @@ class UsersController extends Controller
                         'owner' => $user->owner,
                         'photo' => $user->photoUrl(['w' => 40, 'h' => 40, 'fit' => 'crop']),
                         'deleted_at' => $user->deleted_at,
+                        'created_at' => $user->created_at,
                     ];
                 }),
         ]);

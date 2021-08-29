@@ -14,4 +14,14 @@ class Account extends Model
         return $this->hasMany(Docs::class);
     }
 
+    public function types()
+    {
+        return $this->hasMany(Types::class);
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(Reports::class);
+    }
+
 }

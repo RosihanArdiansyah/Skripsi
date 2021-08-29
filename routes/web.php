@@ -1,13 +1,12 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImagesController;
-use App\Http\Controllers\OrganizationsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DocsController;
+use App\Http\Controllers\TypesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -108,10 +107,61 @@ Route::put('docs/{doc}/restore', [DocsController::class, 'restore'])
     ->name('docs.restore')
     ->middleware('auth');
 
+// Types
+
+Route::get('types', [TypesController::class, 'index'])
+    ->name('types')
+    ->middleware('remember', 'auth');
+
+Route::get('types/create', [TypesController::class, 'create'])
+    ->name('types.create')
+    ->middleware('auth');
+
+Route::post('types', [TypesController::class, 'store'])
+    ->name('types.store')
+    ->middleware('auth');
+
+Route::get('types/{type}/edit', [TypesController::class, 'edit'])
+    ->name('types.edit')
+    ->middleware('auth');
+
+Route::put('types/{type}', [TypesController::class, 'update'])
+    ->name('types.update')
+    ->middleware('auth');
+
+Route::delete('types/{type}', [TypesController::class, 'destroy'])
+    ->name('types.destroy')
+    ->middleware('auth');
+
+Route::put('types/{type}/restore', [TypesController::class, 'restore'])
+    ->name('types.restore')
+    ->middleware('auth');
+
+
 // Reports
 
 Route::get('reports', [ReportsController::class, 'index'])
     ->name('reports')
+    ->middleware('auth');
+
+// Route::post('reports', [ReportsController::class, 'store'])
+//     ->name('reports.store')
+//     ->middleware('auth');
+
+Route::get('reports/{report}/show', [ReportsController::class, 'show'])
+    ->name('reports.show')
+    ->middleware('auth');
+
+Route::put('reports/{report}', [ReportsController::class, 'update'])
+    ->name('reports.update')
+    ->middleware('auth');
+
+Route::delete('reports/{report}', [ReportsController::class, 'destroy'])
+    ->name('reports.destroy')
+    ->middleware('auth');
+
+Route::put('reports/{report}/restore', [ReportsController::class, 'restore'])
+    ->name('reports.restore')
     ->middleware('auth');
 
 // Images

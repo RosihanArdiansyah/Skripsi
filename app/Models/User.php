@@ -25,6 +25,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->belongsTo(Account::class);
     }
 
+    public function userReports()
+    {
+        return $this->hasMany(Reports::class);
+    }
+
     public function getNameAttribute()
     {
         return $this->first_name.' '.$this->last_name;

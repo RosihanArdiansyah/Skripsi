@@ -3,7 +3,7 @@
     <div class="w-full max-w-md">
       <form class="mt-8 bg-white rounded-lg shadow-xl overflow-hidden" @submit.prevent="login">
         <div class="px-10 py-12">
-          <h1 class="text-center font-bold text-3xl">Welcome</h1>
+          <h1 class="text-center font-bold text-3xl">Selamat Datang</h1>
           <div class="mx-auto mt-6 w-24 border-b-2" />
           <text-input v-model="form.email" :error="form.errors.email" class="mt-10" label="Email" type="email" autofocus autocapitalize="off" />
           <text-input v-model="form.password" :error="form.errors.password" class="mt-6" label="Password" type="password" />
