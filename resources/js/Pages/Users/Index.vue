@@ -104,6 +104,7 @@ export default {
     this.form.search = null
     this.form.role = 'user'
     this.form.trashed = 'with'
+    console.log(this.$page.props.auth.user)
   },
   methods: {
     reset() {

@@ -32,5 +32,8 @@ export default {
   props: {
     docs: Array,
   },
+  created(){
+    console.log(this.$page.props.auth.user)
+  },
 }
 </script>

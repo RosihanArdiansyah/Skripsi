@@ -12,19 +12,28 @@
     <div class="bg-white rounded-md shadow overflow-hidden max-w-3xl">
       <form @submit.prevent="update">
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
-          <textarea-input v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full" label="Judul Buku" type="text" />
-          <text-input v-model="form.author" :error="form.errors.author" class="pr-6 pb-8 w-full" label="Pengarang" />
-          <text-input v-model="form.book_code" :error="form.errors.book_code" class="pr-6 pb-8 w-full" label="Kode Buku" />
-          <text-input v-model="form.NIM" :error="form.errors.NIM" class="pr-6 pb-8 w-full" label="Stambuk" />
-          <num-input v-model="form.year" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Tahun" />
-          <text-input v-model="form.department" :error="form.errors.department" class="pr-6 pb-8 w-full" label="Department" />
-          <file-input v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full" type="file" accept=".pdf" label="PDF Files" />
+          <textarea-input v-if="$page.props.auth.user.owner == 1" v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full" label="Judul Buku" type="text" />
+          <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.author" :error="form.errors.author" class="pr-6 pb-8 w-full" label="Pengarang" />
+          <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.book_code" :error="form.errors.book_code" class="pr-6 pb-8 w-full" label="Kode Buku" />
+          <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.NIM" :error="form.errors.NIM" class="pr-6 pb-8 w-full" label="Stambuk" />
+          <num-input v-if="$page.props.auth.user.owner == 1" v-model="form.year" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Tahun" />
+          <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.department" :error="form.errors.department" class="pr-6 pb-8 w-full" label="Department" />
+          <file-input v-if="$page.props.auth.user.owner == 1" v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full" type="file" accept=".pdf" label="PDF Files" />
+          <span v-if="$page.props.auth.user.owner == 0" class="pr-6 pb-8 w-full" label="Judul Buku"> {{ form.docs_name }} </span>
+          <span v-if="$page.props.auth.user.owner == 0" class="pr-6 pb-8 w-full" label="Pengarang"> {{ form.author }} </span>
+          <span v-if="$page.props.auth.user.owner == 0" class="pr-6 pb-8 w-full" label="Kode Buku"> {{ form.book_code }} </span>
+          <span v-if="$page.props.auth.user.owner == 0" class="pr-6 pb-8 w-full" label="Stambuk"> {{ form.NIM }} </span>
+          <span v-if="$page.props.auth.user.owner == 0" class="pr-6 pb-8 w-full" label="Tahun"> {{ form.year }} </span>
+          <span v-if="$page.props.auth.user.owner == 0" class="pr-6 pb-8 w-full" label="Department"> {{ form.department }} </span>
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
-          <button v-if="!doc.deleted_at" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Hapus Entry</button>
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Ubah Entry</loading-button>
+          <button v-if="!doc.deleted_at && $page.props.auth.user.owner == 1" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Hapus Buku</button>
+          <loading-button v-if="$page.props.auth.user.owner == 1" :loading="form.processing" class="btn-indigo ml-auto" type="submit">Ubah Buku</loading-button>
         </div>
       </form>
+      <div v-if="doc.pdf" class="align-middle px-8 py-8 relative md:static items-center">
+        <button class="items-center flex align-middle text-white-200 btn-indigo" tabindex="-1" @click="submit(doc.id,doc.docs_name)">Baca</button>
+      </div>
     </div>
   </div>
 </template>
@@ -67,7 +76,17 @@ export default {
         department:this.doc.department,
         pdf: null,
       }),
+      records:{
+        docs_id: null,
+        users_id: null,
+        user_name: null,
+        department: null,
+        doc_name: null,
+      },
     }
+  },
+  created(){
+    console.log(this.$page.props.auth.user)
   },
   methods: {
     update() {
@@ -84,6 +103,14 @@ export default {
       if (confirm('Apakah anda ingin mengembalikan dokumen ini?')) {
         this.$inertia.put(this.route('docs.restore', this.doc.id))
       }
+    },
+    submit(id,doc_name){
+      this.records.users_id = this.$page.props.auth.user.id
+      this.records.user_name = (this.$page.props.auth.user.first_name + ' ' + this.$page.props.auth.user.last_name)
+      this.records.doc_name = doc_name
+      this.records.docs_id = id
+      this.records.department = this.$page.props.auth.user.department
+      this.$inertia.post(this.route('reports.store',this.records))
     },
   },
 }

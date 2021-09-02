@@ -66,11 +66,16 @@ export default {
         first_name: this.user.first_name,
         last_name: this.user.last_name,
         email: this.user.email,
+        NIM: this.user.NIM,
+        department: this.user.department,
         password: null,
         owner: this.user.owner,
         photo: null,
       }),
     }
+  },
+  created(){
+    console.log(this.form)
   },
   methods: {
     update() {

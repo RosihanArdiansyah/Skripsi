@@ -25,6 +25,8 @@ class UsersController extends Controller
                         'id' => $user->id,
                         'name' => $user->name,
                         'email' => $user->email,
+                        'NIM' => $user->NIM,
+                        'department' => $user->department,
                         'owner' => $user->owner,
                         'photo' => $user->photoUrl(['w' => 40, 'h' => 40, 'fit' => 'crop']),
                         'deleted_at' => $user->deleted_at,
@@ -46,6 +48,8 @@ class UsersController extends Controller
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')],
+            'NIM' => ['nullable'],
+            'department' => ['nullable'],
             'password' => ['nullable'],
             'owner' => ['required', 'boolean'],
             'photo' => ['nullable', 'image'],
@@ -59,6 +63,8 @@ class UsersController extends Controller
             'first_name' => Request::get('first_name'),
             'last_name' => Request::get('last_name'),
             'email' => Request::get('email'),
+            'NIM' => Request::get('NIM'),
+            'department' => Request::get('department'),
             'password' => Request::get('password'),
             'owner' => Request::get('owner'),
             'photo_path' => Request::file('photo') ? Request::file('photo')->storeAs('users',$name) : null,
@@ -74,6 +80,8 @@ class UsersController extends Controller
                 'id' => $user->id,
                 'first_name' => $user->first_name,
                 'last_name' => $user->last_name,
+                'NIM' => $user->NIM,
+                'department' => $user->department,
                 'email' => $user->email,
                 'owner' => $user->owner,
                 'photo' => $user->photoUrl(['w' => 60, 'h' => 60, 'fit' => 'crop']),
@@ -93,6 +101,8 @@ class UsersController extends Controller
             'first_name' => ['required', 'max:50'],
             'last_name' => ['required', 'max:50'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')->ignore($user->id)],
+            'NIM' => ['nullable'],
+            'department' => ['nullable'],
             'password' => ['nullable'],
             'owner' => ['required', 'boolean'],
             'photo' => ['nullable', 'image'],
@@ -100,7 +110,7 @@ class UsersController extends Controller
 
 
 
-        $user->update(Request::only('first_name', 'last_name', 'email', 'owner'));
+        $user->update(Request::only('first_name', 'last_name', 'email','NIM','department', 'owner'));
 
         if (Request::file('photo')) {
             $name = Request::file('photo')->getClientOriginalName();

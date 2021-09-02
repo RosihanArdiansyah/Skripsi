@@ -152,6 +152,10 @@ Route::get('reports/{report}/show', [ReportsController::class, 'show'])
     ->name('reports.show')
     ->middleware('auth');
 
+Route::post('reports', [ReportsController::class, 'store'])
+    ->name('reports.store')
+    ->middleware('auth');
+
 Route::put('reports/{report}', [ReportsController::class, 'update'])
     ->name('reports.update')
     ->middleware('auth');

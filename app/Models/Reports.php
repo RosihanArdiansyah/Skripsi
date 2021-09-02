@@ -8,6 +8,16 @@ class Reports extends Model
 {
     use SoftDeletes;
 
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {

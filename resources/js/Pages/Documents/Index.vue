@@ -43,7 +43,7 @@
             </inertia-link>
           </td>
           <td v-if="doc.pdf" class="px-6 md:px-0 py-4 pb-4 md:pb-0 border-t block md:table-cell relative md:static items-center">
-            <inertia-link class="items-center flex align-middle text-white-200 btn-indigo" as="button" tabindex="-1" type="button" :href="route('docs.show', doc.id)">Read</inertia-link>
+            <button class="items-center flex align-middle text-white-200 btn-indigo" tabindex="-1" @click="submit(doc.id,doc.docs_name)">Baca</button>
           </td>
           <!--<td class="border-t">
                <inertia-link v-if="!doc.deleted_at" class="inline-block align-middle text-white-600 btn-green" as="button" tabindex="-1"type="button" href="#" @click="destroy">
@@ -91,6 +91,13 @@ export default {
         search: this.filters.search,
         trashed: this.filters.trashed,
       },
+      records:{
+        docs_id: null,
+        users_id: null,
+        user_name: null,
+        department: null,
+        doc_name: null,
+      },
     }
   },
   watch: {
@@ -110,6 +117,7 @@ export default {
       this.form.trashed = 'with'
     }
     console.log('Page: ' + this.page.current_page)
+    console.log(this.$page.props.auth.user)
   },
   methods: {
     reset() {
@@ -119,6 +127,14 @@ export default {
       if (confirm('Are you sure you want to delete this docs?')) {
         this.$inertia.delete(this.route('docs.destroy', this.doc.id))
       }
+    },
+    submit(id,doc_name){
+      this.records.users_id = this.$page.props.auth.user.id
+      this.records.user_name = (this.$page.props.auth.user.first_name + ' ' + this.$page.props.auth.user.last_name)
+      this.records.doc_name = doc_name
+      this.records.docs_id = id
+      this.records.department = this.$page.props.auth.user.department
+      this.$inertia.post(this.route('reports.store',this.records))
     },
   },
 

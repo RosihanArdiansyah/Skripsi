@@ -6,6 +6,7 @@ use App\Models\Reports;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class ReportsController extends Controller
@@ -16,7 +17,7 @@ class ReportsController extends Controller
             'page' => Reports::paginate(5),
             'filters' => Request::all('search', 'trashed'),
             'reports' => Auth::user()->account->reports()
-                ->orderBy('user_name')
+                ->orderBy('created_at')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate(5)
                 ->withQueryString()
@@ -51,19 +52,30 @@ class ReportsController extends Controller
     //     return Inertia::render('Reports/Create');
     // }
 
-    // public function store()
-    // {
-        
-    //     Request::validate([
-    //             'name' => ['required', 'max:100'],
-    //     ]);
-     
-    //     Auth::user()->account->types()->create([
-    //         'name' => Request::get('name'),
-    //     ]);
+    public function store()
+    {
+        $doc = Request::get('docs_id');
+        Auth::user()->account->reports()->create(
+            Request::validate([
+                'docs_id' => ['nullable', Rule::exists('docs', 'id')->where(function ($query) {
+                    $query->where('account_id', Auth::user()->account_id);
+                })],
+                'users_id' => ['nullable', Rule::exists('users', 'id')->where(function ($query) {
+                    $query->where('account_id', Auth::user()->account_id);
+                })],
+                'user_name' => ['required', 'max:50'],
+                'doc_name' => ['nullable', Rule::exists('docs', 'docs_name')->where(function ($query) {
+                    $query->where('account_id', Auth::user()->account_id);
+                })],
+                'department' => ['nullable', Rule::exists('users', 'department')->where(function ($query) {
+                    $query->where('account_id', Auth::user()->account_id);
+                })],
 
-    //     return Redirect::route('types')->with('success', 'Dokumen ditambahkan');
-    // }
+             ])
+        );
+
+        return Redirect::route('docs.show',$doc);
+    }
 
     public function destroy(Reports $report)
     {
