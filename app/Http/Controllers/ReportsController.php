@@ -27,7 +27,7 @@ class ReportsController extends Controller
                         'user_name' => $report->user_name,
                         'department' => $report->department,
                         'doc_name' => $report->doc_name,
-                        'created_at' => $report->created_at,
+                        'created_at' => $report->created_at->format('d M Y - H:i:s'),
                         'deleted_at' => $report->deleted_at,
                     ];
                 }),

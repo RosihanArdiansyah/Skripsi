@@ -9,6 +9,7 @@ use League\Glide\Server;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
+
 class Docs extends Model
 {
     use SoftDeletes;
@@ -30,7 +31,6 @@ class Docs extends Model
     {
         return $this->belongsTo(Types::class);
     }
-
 
      public function scopeFilter($query, array $filters)
     {

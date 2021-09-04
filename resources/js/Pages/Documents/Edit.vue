@@ -15,16 +15,23 @@
           <textarea-input v-if="$page.props.auth.user.owner == 1" v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full" label="Judul Buku" type="text" />
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.author" :error="form.errors.author" class="pr-6 pb-8 w-full" label="Pengarang" />
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.book_code" :error="form.errors.book_code" class="pr-6 pb-8 w-full" label="Kode Buku" />
+          <select-input v-model="form.types_id" :error="form.errors.types_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Jenis Buku">
+            <option :value="null" />
+            <option v-for="type in types" :key="type.id" :value="type.id">{{ type.name }}</option>
+          </select-input>
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.NIM" :error="form.errors.NIM" class="pr-6 pb-8 w-full" label="Stambuk" />
           <num-input v-if="$page.props.auth.user.owner == 1" v-model="form.year" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Tahun" />
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.department" :error="form.errors.department" class="pr-6 pb-8 w-full" label="Department" />
           <file-input v-if="$page.props.auth.user.owner == 1" v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full" type="file" accept=".pdf" label="PDF Files" />
-          <span v-if="$page.props.auth.user.owner == 0" class="pr-6 pb-8 w-full" label="Judul Buku"> {{ form.docs_name }} </span>
-          <span v-if="$page.props.auth.user.owner == 0" class="pr-6 pb-8 w-full" label="Pengarang"> {{ form.author }} </span>
-          <span v-if="$page.props.auth.user.owner == 0" class="pr-6 pb-8 w-full" label="Kode Buku"> {{ form.book_code }} </span>
-          <span v-if="$page.props.auth.user.owner == 0" class="pr-6 pb-8 w-full" label="Stambuk"> {{ form.NIM }} </span>
-          <span v-if="$page.props.auth.user.owner == 0" class="pr-6 pb-8 w-full" label="Tahun"> {{ form.year }} </span>
-          <span v-if="$page.props.auth.user.owner == 0" class="pr-6 pb-8 w-full" label="Department"> {{ form.department }} </span>
+          <div v-if="$page.props.auth.user.owner == 0">
+            <span class="pr-6 pb-8 w-full" label="Judul Buku"> {{ form.docs_name }} </span>
+            <span class="pr-6 pb-8 w-full" label="Pengarang"> {{ form.author }} </span>
+            <span class="pr-6 pb-8 w-full" label="Kode Buku"> {{ form.book_code }} </span>
+            <!-- <span v-for="type in types" :key="type.id" :value="type.id" class="pr-6 pb-8 w-full" label="Jenis Buku"> {{ type.name }} </span> -->
+            <span class="pr-6 pb-8 w-full" label="Stambuk"> {{ form.NIM }} </span>
+            <span class="pr-6 pb-8 w-full" label="Tahun"> {{ form.year }} </span>
+            <span class="pr-6 pb-8 w-full" label="Department"> {{ form.department }} </span>
+          </div>
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
           <button v-if="!doc.deleted_at && $page.props.auth.user.owner == 1" class="text-red-600 hover:underline" tabindex="-1" type="button" @click="destroy">Hapus Buku</button>
@@ -41,6 +48,7 @@
 <script>
 import Layout from '@/Shared/Layout'
 import TextInput from '@/Shared/TextInput'
+import SelectInput from '@/Shared/SelectInput'
 import TextareaInput from '@/Shared/TextareaInput'
 import NumInput from '@/Shared/NumInput'
 import FileInput from '@/Shared/FileInput'
@@ -53,6 +61,7 @@ export default {
   },
   components: {
     FileInput,
+    SelectInput,
     LoadingButton,
     TextInput,
     TextareaInput,
@@ -62,6 +71,7 @@ export default {
   layout: Layout,
   props: {
     doc: Object,
+    types: Array,
   },
   remember: 'form',
   data() {
@@ -70,6 +80,7 @@ export default {
         _method:'put',
         docs_name: this.doc.docs_name,
         book_code: this.doc.book_code,
+        types_id: this.doc.types_id,
         author:this.doc.author,
         NIM:this.doc.NIM,
         year:this.doc.year,

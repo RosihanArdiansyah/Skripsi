@@ -18,7 +18,13 @@ class DocsController extends Controller
     return Inertia::render('Documents/Index', [
             'page' => Docs::paginate(5),
             'filters' => Request::all('search', 'trashed'),
+            'types' => Auth::user()->account->types()
+                ->orderBy('name')
+                ->get()
+                ->map
+                ->only('id', 'name'),
             'docs' => Auth::user()->account->docs()
+                ->with('typeDocs')
                 ->orderBy('docs_name')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate(5)
@@ -44,6 +50,11 @@ class DocsController extends Controller
             'page' => Docs::paginate(5),
             'src' => ['val' => $doc],
             'filters' => Request::all('search', 'trashed'),
+            'types' => Auth::user()->account->types()
+                ->orderBy('name')
+                ->get()
+                ->map
+                ->only('id', 'name'),
             'docs' => Auth::user()->account->docs()
                 ->orderBy('docs_name')
                 ->filter(Request::only('search', 'trashed'))
@@ -53,6 +64,7 @@ class DocsController extends Controller
                     return [
                         'id' => $docs->id,
                         'docs_name' => $docs->docs_name,
+                        'types_id' => $docs->types_id,
                         'author'=>$docs->author,
                         'department'=>$docs->department,
                         'NIM'=>$docs->NIM,
@@ -66,7 +78,13 @@ class DocsController extends Controller
 
     public function create()
     {
-        return Inertia::render('Documents/Create');
+        return Inertia::render('Documents/Create',[
+            'types' => Auth::user()->account->types()
+                ->orderBy('name')
+                ->get()
+                ->map
+                ->only('id', 'name'),
+        ]);
     }
 
     public function store()
@@ -75,6 +93,9 @@ class DocsController extends Controller
         Request::validate([
                 'docs_name' => ['required', 'max:256'],
                 'book_code' => ['nullable', 'max:100'],
+                'types_id' => ['nullable', Rule::exists('types', 'id')->where(function ($query) {
+                    $query->where('account_id', Auth::user()->account_id);
+                })],
                 'author' => ['required', 'max:100'],
                 'NIM' => ['required', 'max:100'],
                 'year' => ['required', 'max:4'],
@@ -91,6 +112,7 @@ class DocsController extends Controller
         Auth::user()->account->docs()->create([
             'docs_name' => Request::get('docs_name'),
             'book_code' => Request::get('book_code'),
+            'types_id' => Request::get('types_id'),
             'author' => Request::get('author'),
             'NIM' => Request::get('NIM'),
             'year' => Request::get('year'),
@@ -108,6 +130,7 @@ class DocsController extends Controller
                 'id' => $doc->id,
                 'docs_name' => $doc->docs_name,
                 'book_code' => $doc->book_code,
+                'types' => $doc->types ? $doc->types->only('name') : null,
                 'author'=>$doc->author,
                 'department'=>$doc->department,
                 'NIM'=>$doc->NIM,
@@ -115,6 +138,11 @@ class DocsController extends Controller
                 'deleted_at' => $doc->deleted_at,
                 'pdf'=> $doc->files,
             ],
+            'types' => Auth::user()->account->types()
+                ->orderBy('name')
+                ->get()
+                ->map
+                ->only('id', 'name'),
         ]);
     }
 
@@ -133,10 +161,12 @@ class DocsController extends Controller
     public function update(Docs $doc)
     {
         
-
         Request::validate([
             'docs_name' => ['required', 'max:256'],
             'book_code' => ['nullable', 'max:100'],
+            'types_id' => ['nullable', Rule::exists('types', 'id')->where(function ($query) {
+                $query->where('account_id', Auth::user()->account_id);
+            })],
             'author' => ['required', 'max:100'],
             'NIM' => ['required', 'max:100'],
             'year' => ['required', 'max:4'],
@@ -147,7 +177,7 @@ class DocsController extends Controller
         $name = str_replace(' ','_',Request::get('author'));
         $nim = Request::get('NIM');
 
-        $doc->update(Request::only('docs_name','author','department','NIM','year'));
+        $doc->update(Request::only('docs_name','author','department','NIM','year','types_id'));
 
         if (Request::file('pdf')) {
             $docName = Request::file('pdf')->getClientOriginalExtension();
