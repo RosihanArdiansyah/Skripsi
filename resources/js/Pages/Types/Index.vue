@@ -10,9 +10,15 @@
           <option value="only">Only Trashed</option>
         </select>
       </search-filter>
-      <inertia-link v-if="$page.props.auth.user.owner == 1" class="btn-indigo" :href="route('types.create')">
+      <inertia-link class="btn-indigo hidden md:inline" :href="route('types.create')">
         <span>Tambah</span>
-        <span class="hidden md:inline">Dokumen</span>
+        <span class="hidden md:inline">Jenis Buku</span>
+      </inertia-link>
+    </div>
+    <div class="pb-8 flex justify-end md:hidden items-center">
+      <inertia-link class="btn-indigo" :href="route('types.create')">
+        <span>Tambah</span>
+        <span class="hidden md:inline">Jenis Buku</span>
       </inertia-link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x">

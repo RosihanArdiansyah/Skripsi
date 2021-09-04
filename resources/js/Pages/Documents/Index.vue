@@ -1,10 +1,10 @@
 <template>
   <div>
     <h1 class="mb-8 font-bold text-3xl">Daftar Buku</h1>
-    <div class="mb-6 flex justify-between items-center">
+    <div class="mb-8 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
-        <label class="block text-gray-700">Trashed:</label>
-        <select v-model="form.trashed" class="mt-1 w-full form-select">
+        <label class="block text-gray-700">Jenis Buku :</label>
+        <select v-model="form.trashed" class="hidden mt-1 w-full form-select">
           <option :value="null" />
           <option value="with">With Trashed</option>
           <option value="only">Only Trashed</option>
@@ -14,13 +14,19 @@
           <option v-for="type in types" :key="type.id" :value="type.id">{{ type.name }}</option>
         </select>
       </search-filter>
+      <inertia-link v-if="$page.props.auth.user.owner == 1" class="btn-indigo hidden md:inline" :href="route('docs.create')">
+        <span>Tambah</span>
+        <span class="hidden md:inline">Dokumen</span>
+      </inertia-link>
+    </div>
+    <div class="pb-8 flex justify-end md:hidden items-center">
       <inertia-link v-if="$page.props.auth.user.owner == 1" class="btn-indigo" :href="route('docs.create')">
         <span>Tambah</span>
         <span class="hidden md:inline">Dokumen</span>
       </inertia-link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x">
-      <table class="w-full table-fixed break-all md:break-words">
+      <table class="w-full whitespace-normal table-fixed break-all md:break-words">
         <tr class="text-left font-bold">
           <th class="w-1/2 px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600 hidden md:table-cell">Nama</th>
           <th class="w-1/5 px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600 hidden md:table-cell">Pengarang</th>
@@ -31,22 +37,22 @@
         flex md:table-row flex-col md:flex-row border-4 md:border flex-wrap md:flex-no-wrap"
         >
           <td class="pt-4 md:pt-0 md:border-t break-words block md:table-cell relative md:static">
-            <inertia-link class="px-6 py-4 flex items-center focus:text-indigo-500" :href="route('docs.edit', doc.id)">
+            <inertia-link class="px-6 py-6 flex items-center focus:text-indigo-500" :href="route('docs.edit', doc.id)">
               {{ doc.docs_name }}
               <icon v-if="doc.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </inertia-link>
           </td>
           <td class="border-t block md:table-cell relative md:static">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('docs.edit', doc.id)" tabindex="-1">
+            <inertia-link class="px-6 py-6 flex items-center" :href="route('docs.edit', doc.id)" tabindex="-1">
               {{ doc.author }}
             </inertia-link>
           </td>
           <td class="border-t block md:table-cell relative md:static">
-            <inertia-link class="px-6 py-4 flex items-center" :href="route('docs.edit', doc.id)" tabindex="-1">
+            <inertia-link class="px-6 py-6 flex items-center" :href="route('docs.edit', doc.id)" tabindex="-1">
               {{ doc.department }}
             </inertia-link>
           </td>
-          <td v-if="doc.pdf" class="px-6 md:px-0 py-4 pb-4 md:pb-0 border-t block md:table-cell relative md:static items-center">
+          <td v-if="doc.pdf" class="px-6 md:px-0 py-6 border-t block md:table-cell relative md:static items-center">
             <button class="items-center flex align-middle text-white-200 btn-indigo" tabindex="-1" @click="submit(doc.id,doc.docs_name)">Baca</button>
           </td>
           <!--<td class="border-t">

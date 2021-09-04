@@ -25,7 +25,7 @@
                 </div>
                 <icon class="w-5 h-5 group-hover:fill-red-600 fill-gray-700 focus:fill-red-600" name="cheveron-down" />
               </div>
-              <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
+              <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-base">
                 <inertia-link class="block px-6 py-2 hover:bg-red-500 hover:text-white" :href="route('users.edit', $page.props.auth.user.id)">Profil</inertia-link>
                 <inertia-link class="block px-6 py-2 hover:bg-red-500 hover:text-white w-full text-left" :href="route('logout')" method="post" as="button">Keluar</inertia-link>
               </div>
