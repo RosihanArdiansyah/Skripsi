@@ -11,9 +11,9 @@
           <text-input v-model="form.last_name" :error="form.errors.last_name" class="pr-6 pb-8 w-full" label="Last name" />
           <text-input v-model="form.email" :error="form.errors.email" class="pr-6 pb-8 w-full" label="Email" />
           <text-input v-model="form.password" :error="form.errors.password" class="pr-6 pb-8 w-full" type="password" autocomplete="new-password" label="Password" />
-          <select-input v-model="form.owner" :error="form.errors.owner" class="hidden pr-6 pb-8 w-full" label="Admin">
-            <option :value="true">Ya</option>
-            <option :value="false">Tidak</option>
+          <select-input v-model="form.owner" :error="form.errors.owner" class="hidden pr-6 pb-8 w-full" label="Owner">
+            <option :value="true">Yes</option>
+            <option :value="false">No</option>
           </select-input>
           <file-input v-model="form.photo" :error="form.errors.photo" class="pr-6 pb-8 w-full" type="file" accept="image/*" label="Photo" />
         </div>

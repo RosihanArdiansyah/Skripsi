@@ -3,32 +3,32 @@
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('dashboard')">
         <icon name="dashboard" class="w-4 h-4 mr-2" :class="isUrl('') ? 'fill-white' : 'fill-yellow-400 group-hover:fill-white'" />
-        <div :class="isUrl('') ? 'text-white text-lg' : 'text-yellow-300 text-lg group-hover:text-white text-lg'">Dashboard</div>
+        <div :class="isUrl('') ? 'text-white' : 'text-yellow-300 group-hover:text-white'">Dashboard</div>
       </inertia-link>
     </div>
     <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('docs')">
         <icon name="book" class="w-4 h-4 mr-2" :class="isUrl('docs') ? 'fill-white' : 'fill-yellow-400 group-hover:fill-white'" />
-        <div :class="isUrl('docs') ? 'text-white text-lg' : 'text-yellow-300 text-lg group-hover:text-white text-lg'">Bacaan</div>
+        <div :class="isUrl('docs') ? 'text-white' : 'text-yellow-300 group-hover:text-white'">Bacaan</div>
       </inertia-link>
     </div>
     <div v-if="$page.props.auth.user.owner == 1">
       <div class="mb-4">
         <inertia-link class="flex items-center group py-3" :href="route('users')">
           <icon name="users" class="w-4 h-4 mr-2" :class="isUrl('users') ? 'fill-white' : 'fill-yellow-400 group-hover:fill-white'" />
-          <div :class="isUrl('users') ? 'text-white text-lg' : 'text-yellow-300 text-lg group-hover:text-white text-lg'">Users</div>
+          <div :class="isUrl('users') ? 'text-white' : 'text-yellow-300 group-hover:text-white'">Users</div>
         </inertia-link>
       </div>
       <div class="mb-4">
         <inertia-link class="flex items-center group py-3" :href="route('types')">
           <icon name="book" class="w-4 h-4 mr-2" :class="isUrl('types') ? 'fill-white' : 'fill-yellow-400 group-hover:fill-white'" />
-          <div :class="isUrl('types') ? 'text-white text-lg' : 'text-yellow-300 text-lg group-hover:text-white text-lg'">Jenis Buku</div>
+          <div :class="isUrl('types') ? 'text-white' : 'text-yellow-300 group-hover:text-white'">Jenis Buku</div>
         </inertia-link>
       </div>
       <div class="mb-4">
         <inertia-link class="flex items-center group py-3" :href="route('reports')">
           <icon name="printer" class="w-4 h-4 mr-2" :class="isUrl('reports') ? 'fill-white' : 'fill-yellow-400 group-hover:fill-white'" />
-          <div :class="isUrl('reports') ? 'text-white text-lg' : 'text-yellow-300 text-lg group-hover:text-white text-lg'">Laporan</div>
+          <div :class="isUrl('reports') ? 'text-white' : 'text-yellow-300 group-hover:text-white'">Laporan</div>
         </inertia-link>
       </div>
     </div>

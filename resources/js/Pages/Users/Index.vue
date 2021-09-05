@@ -7,26 +7,21 @@
         <select v-model="form.role" class="mt-1 w-full form-select">
           <option :value="null" />
           <option value="user">User</option>
-          <option value="admin">Admin</option>
+          <option value="owner">Owner</option>
         </select>
         <label class="mt-4 block text-gray-700">Trashed:</label>
         <select v-model="form.trashed" class="mt-1 w-full form-select">
+          <option :value="null" />
           <option value="with">With Trashed</option>
           <option value="only">Only Trashed</option>
         </select>
       </search-filter>
-      <inertia-link class="btn-indigo hidden md:inline" :href="route('users.create')">
-        <span>Tambah</span>
-        <span class="hidden md:inline">User</span>
-      </inertia-link>
-    </div>
-    <div class="pb-8 flex justify-end md:hidden items-center">
       <inertia-link class="btn-indigo" :href="route('users.create')">
         <span>Tambah</span>
         <span class="hidden md:inline">User</span>
       </inertia-link>
     </div>
-    <div class="bg-white rounded-md shadow overflow-x">
+    <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full whitespace-nowrap">
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600 hidden md:table-cell">Nama</th>
@@ -53,7 +48,7 @@
           <td class="border-t block md:table-cell relative md:static">
             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Role</span>
             <inertia-link class="px-6 py-4 flex items-center" :href="route('users.edit', user.id)" tabindex="-1">
-              {{ user.owner ? 'Admin' : 'User' }}
+              {{ user.owner ? 'Owner' : 'User' }}
             </inertia-link>
           </td>
         </tr>

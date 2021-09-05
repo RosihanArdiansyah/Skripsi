@@ -4,8 +4,8 @@
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full table-auto whitespace-normal break-all lg:break-words">
         <tr class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600">Department</th>
-          <th class="px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600">Total</th>
+          <th class="px-6 pt-6 pb-4">Department</th>
+          <th class="px-6 pt-6 pb-4">Total</th>
         </tr>
         <tr v-for="doc in docs" :key="doc.department" class="hover:bg-gray-100 focus-within:bg-gray-100">
           <td class="border-t">
