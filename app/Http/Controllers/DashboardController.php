@@ -18,6 +18,7 @@ class DashboardController extends Controller
         return Inertia::render('Dashboard/Index',[
             'docs' => Auth::user()->account->docs()
             	->select('department',DB::raw('count(department) as total'))
+                ->whereNotNull('department')
                 ->orderBy('department')
                 ->groupBy('department')
                 ->get()

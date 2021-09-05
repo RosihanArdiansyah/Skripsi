@@ -34,6 +34,7 @@ export default {
   },
   created(){
     console.log(this.$page.props.auth.user)
+    console.log(this.docs)
   },
 }
 </script>

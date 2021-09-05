@@ -44,6 +44,8 @@ class Docs extends Model
             } elseif ($trashed === 'only') {
                 $query->onlyTrashed();
             }
+        })->when($filters['types'] ?? null, function ($query, $types) {
+            $query->where('types_id', 'like', '%'.$types.'%');
         });
     } 
 }
