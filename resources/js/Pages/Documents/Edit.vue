@@ -14,9 +14,10 @@
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <textarea-input v-if="$page.props.auth.user.owner == 1" v-model="form.docs_name" :error="form.errors.docs_name" class="pr-6 pb-8 w-full" label="Judul Buku" type="text" />
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.author" :error="form.errors.author" class="pr-6 pb-8 w-full" label="Pengarang" />
+          <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.publisher" :error="form.errors.publisher" class="pr-6 pb-8 w-full" label="Penerbit" />
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.book_code" :error="form.errors.book_code" class="pr-6 pb-8 w-full" label="Kode Buku" />
           <select-input v-model="form.types_id" :error="form.errors.types_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Jenis Buku">
-            <option :value="null" />
+            <option :value="form.types_id" />
             <option v-for="type in types" :key="type.id" :value="type.id">{{ type.name }}</option>
           </select-input>
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.NIM" :error="form.errors.NIM" class="pr-6 pb-8 w-full" label="Stambuk" />
@@ -26,11 +27,12 @@
           <div v-if="$page.props.auth.user.owner == 0">
             <span class="pr-6 pb-8 w-full" label="Judul Buku"> {{ form.docs_name }} </span>
             <span class="pr-6 pb-8 w-full" label="Pengarang"> {{ form.author }} </span>
+            <span v-if="doc.publisher" class="pr-6 pb-8 w-full" label="Penerbit"> {{ form.publisher }} </span>
             <span class="pr-6 pb-8 w-full" label="Kode Buku"> {{ form.book_code }} </span>
             <!-- <span v-for="type in types" :key="type.id" :value="type.id" class="pr-6 pb-8 w-full" label="Jenis Buku"> {{ type.name }} </span> -->
-            <span class="pr-6 pb-8 w-full" label="Stambuk"> {{ form.NIM }} </span>
+            <span v-if="doc.NIM" class="pr-6 pb-8 w-full" label="Stambuk"> {{ form.NIM }} </span>
             <span class="pr-6 pb-8 w-full" label="Tahun"> {{ form.year }} </span>
-            <span class="pr-6 pb-8 w-full" label="Department"> {{ form.department }} </span>
+            <span v-if="doc.department" class="pr-6 pb-8 w-full" label="Department"> {{ form.department }} </span>
           </div>
         </div>
         <div class="px-8 py-4 bg-gray-50 border-t border-gray-100 flex items-center">
@@ -82,6 +84,7 @@ export default {
         book_code: this.doc.book_code,
         types_id: this.doc.types_id,
         author:this.doc.author,
+        publisher:this.doc.publisher,
         NIM:this.doc.NIM,
         year:this.doc.year,
         department:this.doc.department,

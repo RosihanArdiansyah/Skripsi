@@ -18,7 +18,8 @@ class CreateDocsTable extends Migration
             $table->integer('account_id')->index();
             $table->integer('types_id')->index();
             $table->string('docs_name', 100);
-            $table->string('author', 100);
+            $table->string('author', 100);            
+            $table->string('publisher', 191);
             $table->string('NIM', 100);
             $table->string('department', 100);
             $table->integer('year', 4);

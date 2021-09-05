@@ -9,6 +9,7 @@
         <div class="p-8 -mr-6 -mb-8 flex flex-wrap">
           <textarea-input v-model="form.docs_name" autocomplete="off" :error="form.errors.docs_name" class="pr-6 pb-8 w-full" label="Judul Buku" type="text" />
           <text-input v-model="form.author" autocomplete="off" :error="form.errors.author" class="pr-6 pb-8 w-full" label="Pengarang" />
+          <text-input v-model="form.publisher" autocomplete="off" :error="form.errors.publisher" class="pr-6 pb-8 w-full" label="Penerbit" />
           <text-input v-model="form.book_code" autocomplete="off" :error="form.errors.book_code" class="pr-6 pb-8 w-full" label="Kode Buku" />
           <select-input v-model="form.types_id" :error="form.errors.types_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Jenis Buku">
             <option :value="null" />
@@ -58,6 +59,7 @@ export default {
         types_id: null,
         book_code:null,
         author:null,
+        publisher:null,
         NIM:null,
         year:null,
         department:null,
