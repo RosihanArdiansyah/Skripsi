@@ -34,7 +34,6 @@ class DocsController extends Controller
                         'id' => $docs->id,
                         'docs_name' => $docs->docs_name,
                         'author'=>$docs->author,
-                        'publisher'=>$docs->publisher,
                         'department'=>$docs->department,
                         'NIM'=>$docs->NIM,
                         'year'=>$docs->year,
@@ -67,7 +66,6 @@ class DocsController extends Controller
                         'docs_name' => $docs->docs_name,
                         'types_id' => $docs->types_id,
                         'author'=>$docs->author,
-                        'publisher'=>$docs->publisher,
                         'department'=>$docs->department,
                         'NIM'=>$docs->NIM,
                         'year'=>$docs->year,
@@ -99,10 +97,9 @@ class DocsController extends Controller
                     $query->where('account_id', Auth::user()->account_id);
                 })],
                 'author' => ['required', 'max:100'],
-                'publisher' => ['nullable', 'max:191'],
-                'NIM' => ['nullable', 'max:100'],
+                'NIM' => ['required', 'max:100'],
                 'year' => ['required', 'max:4'],
-                'department' => ['nullable', 'max:100'],
+                'department' => ['required', 'max:100'],
                 'pdf' => ['nullable', 'file'],
         ]);
 
@@ -117,7 +114,6 @@ class DocsController extends Controller
             'book_code' => Request::get('book_code'),
             'types_id' => Request::get('types_id'),
             'author' => Request::get('author'),
-            'publisher' => Request::get('publisher'),
             'NIM' => Request::get('NIM'),
             'year' => Request::get('year'),
             'department' => Request::get('department'),
@@ -136,7 +132,6 @@ class DocsController extends Controller
                 'book_code' => $doc->book_code,
                 'types' => $doc->types ? $doc->types->only('name') : null,
                 'author'=>$doc->author,
-                'publisher'=>$doc->publisher,
                 'department'=>$doc->department,
                 'NIM'=>$doc->NIM,
                 'year'=>$doc->year,
@@ -173,17 +168,16 @@ class DocsController extends Controller
                 $query->where('account_id', Auth::user()->account_id);
             })],
             'author' => ['required', 'max:100'],
-            'publisher' => ['nullable', 'max:191'],
-            'NIM' => ['nullable', 'max:100'],
+            'NIM' => ['required', 'max:100'],
             'year' => ['required', 'max:4'],
-            'department' => ['nullable', 'max:100'],
+            'department' => ['required', 'max:100'],
             'pdf' => ['nullable', 'file'],
         ]);
 
         $name = str_replace(' ','_',Request::get('author'));
         $nim = Request::get('NIM');
 
-        $doc->update(Request::only('docs_name','author','publisher','department','NIM','year','types_id'));
+        $doc->update(Request::only('docs_name','author','department','NIM','year','types_id'));
 
         if (Request::file('pdf')) {
             $docName = Request::file('pdf')->getClientOriginalExtension();
