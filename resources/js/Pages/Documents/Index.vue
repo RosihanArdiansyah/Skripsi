@@ -3,8 +3,8 @@
     <h1 class="mb-8 font-bold text-3xl">Daftar Buku</h1>
     <div class="mb-6 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
-        <label class="block text-gray-700">Trashed:</label>
-        <select v-model="form.trashed" class="mt-1 w-full form-select">
+        <label class="block text-gray-700">Jenis Buku:</label>
+        <select v-model="form.trashed" class="hidden mt-1 w-full form-select">
           <option :value="null" />
           <option value="with">With Trashed</option>
           <option value="only">Only Trashed</option>
@@ -122,6 +122,7 @@ export default {
     if(this.$page.props.auth.user.owner == 1){
       this.form.trashed = 'with'
     }
+    this.form.types = null
 
     console.log('Page: ' + this.page.current_page)
     console.log(this.$page.props.auth.user)
@@ -129,6 +130,7 @@ export default {
   methods: {
     reset() {
       this.form.search = null
+      this.form.types = null
     },
     destroy() {
       if (confirm('Are you sure you want to delete this docs?')) {

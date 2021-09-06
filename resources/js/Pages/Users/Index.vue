@@ -3,8 +3,7 @@
     <h1 class="mb-8 font-bold text-3xl">Daftar User</h1>
     <div class="mb-6 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
-        <label class="block text-gray-700">Role:</label>
-        <select v-model="form.role" class="mt-1 w-full form-select">
+        <select v-model="form.role" class="hidden mt-1 w-full form-select">
           <option :value="null" />
           <option value="user">User</option>
           <option value="owner">Owner</option>
