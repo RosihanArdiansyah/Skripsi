@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="mb-8 flex justify-start max-w-3xl">
-      <h1 class="mb-8 font-bold text-3xl">
+      <h1 class="mb-8 font-bold text-2xl">
         <inertia-link class="text-indigo-400 hover:text-indigo-600" :href="route('docs')">{{ form.docs_name }}</inertia-link>
       </h1>
       <img v-if="doc.coverImg" class="block w-8 h-8 rounded-full ml-4" :src="doc.coverImg" />

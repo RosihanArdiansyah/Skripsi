@@ -71,13 +71,17 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
 
 //Documents
 
-Route::get('docs/{doc}/index', [DocsController::class, 'index'])
+Route::get('docs', [DocsController::class, 'index'])
     ->name('docs')
     ->middleware('remember', 'auth');
 
+// Route::get('docs/{type}/skripsi', [DocsController::class, 'skripsi'])
+//     ->name('skripsi')
+//     ->middleware('remember', 'auth');
+
 Route::get('docs/{doc}/searchIndex', [DocsController::class, 'searchIndex'])
     ->name('docs.search')
-    ->middleware('auth');
+    ->middleware('remember','auth');
 
 Route::get('docs/create', [DocsController::class, 'create'])
     ->name('docs.create')

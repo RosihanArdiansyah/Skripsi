@@ -7,17 +7,17 @@
       </inertia-link>
     </div>
     <div class="mb-4">
-      <inertia-link class="flex items-center group py-3" :href="route('docs',2)">
+      <inertia-link class="flex items-center group py-3" :href="route('docs')">
         <icon name="book" class="w-4 h-4 mr-2" :class="isUrl('docs') ? 'fill-white' : 'fill-yellow-400 group-hover:fill-white'" />
-        <div :class="isUrl('docs') ? 'text-white' : 'text-yellow-300 group-hover:text-white'">Buku Teknik</div>
+        <div :class="isUrl('docs') ? 'text-white' : 'text-yellow-300 group-hover:text-white'">Bacaan</div>
       </inertia-link>
     </div>
-    <div class="mb-4">
-      <inertia-link class="flex items-center group py-3" :href="route('docs',1)">
+    <!-- <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('docs')">
         <icon name="book" class="w-4 h-4 mr-2" :class="isUrl('docs') ? 'fill-white' : 'fill-yellow-400 group-hover:fill-white'" />
         <div :class="isUrl('docs') ? 'text-white' : 'text-yellow-300 group-hover:text-white'">Tugas Akhir</div>
       </inertia-link>
-    </div>
+    </div> -->
     <div v-if="$page.props.auth.user.owner == 1" class="mt-8">
       <div class="mb-2">
         <span class="flex items-center group py-3 text-yellow-300 text-xl">Database</span>
