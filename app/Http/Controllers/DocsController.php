@@ -13,7 +13,7 @@ use Inertia\Inertia;
 
 class DocsController extends Controller
 {
-    public function index()
+    public function index($type)
     {
     return Inertia::render('Documents/Index', [
             'page' => Docs::paginate(5),
@@ -27,12 +27,14 @@ class DocsController extends Controller
                 ->with('typeDocs')
                 ->orderBy('docs_name')
                 ->filter(Request::only('search', 'trashed'))
+                ->where('types_id',$type)
                 ->paginate(5)
                 ->withQueryString()
                 ->through(function ($docs) {
                     return [
                         'id' => $docs->id,
                         'docs_name' => $docs->docs_name,
+                        'types_id' => $docs->types_id,
                         'author'=>$docs->author,
                         'publisher'=>$docs->publisher,
                         'department'=>$docs->department,

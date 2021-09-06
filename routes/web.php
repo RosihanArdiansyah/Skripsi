@@ -71,7 +71,7 @@ Route::put('users/{user}/restore', [UsersController::class, 'restore'])
 
 //Documents
 
-Route::get('docs', [DocsController::class, 'index'])
+Route::get('docs/{doc}/index', [DocsController::class, 'index'])
     ->name('docs')
     ->middleware('remember', 'auth');
 

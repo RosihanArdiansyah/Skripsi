@@ -9,10 +9,6 @@
           <option value="with">With Trashed</option>
           <option value="only">Only Trashed</option>
         </select>
-        <select v-model="form.types" class="mt-1 w-full form-select">
-          <option :value="null" />
-          <option v-for="type in types" :key="type.id" :value="type.id">{{ type.name }}</option>
-        </select>
       </search-filter>
       <inertia-link v-if="$page.props.auth.user.owner == 1" class="btn-indigo" :href="route('docs.create')">
         <span>Tambah</span>
@@ -95,7 +91,6 @@ export default {
       form: {
         search: this.filters.search,
         trashed: this.filters.trashed,
-        types:this.filters.types,
       },
       records:{
         docs_id: null,
@@ -122,6 +117,7 @@ export default {
     if(this.$page.props.auth.user.owner == 1){
       this.form.trashed = 'with'
     }
+
     console.log('Page: ' + this.page.current_page)
     console.log(this.$page.props.auth.user)
   },

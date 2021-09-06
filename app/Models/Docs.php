@@ -37,6 +37,7 @@ class Docs extends Model
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where('docs_name', 'like', '%'.$search.'%')
                 ->orWhere('author', 'like', '%'.$search.'%')
+                ->orWhere('types_id', 'like', '%'.$search.'%')
                 ->orWhere('department', 'like', '%'.$search.'%');
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {
             if ($trashed === 'with') {
@@ -44,7 +45,7 @@ class Docs extends Model
             } elseif ($trashed === 'only') {
                 $query->onlyTrashed();
             }
-        })->when($filters['types'] ?? null, function ($query, $types) {
+        })->when($filters['search'] ?? null, function ($query, $types) {
             $query->where('types_id', 'like', '%'.$types.'%');
         });
     } 
