@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Date;
 
 class ReportsController extends Controller
 {
     public function index()
     {
+        setlocale(LC_TIME, 'Indonesian');
         return Inertia::render('Reports/Index', [
             'page' => Reports::paginate(5),
             'filters' => Request::all('search', 'trashed'),
@@ -27,7 +29,7 @@ class ReportsController extends Controller
                         'user_name' => $report->user_name,
                         'department' => $report->department,
                         'doc_name' => $report->doc_name,
-                        'created_at' => $report->created_at->format('d M Y - H:i:s'),
+                        'created_at' => $report->created_at->formatLocalized('%A, %d %B %Y'),
                         'deleted_at' => $report->deleted_at,
                     ]; 
                 }),
@@ -36,13 +38,14 @@ class ReportsController extends Controller
 
     public function show(Reports $report)
     {
+        setlocale(LC_TIME, 'Indonesian');
         return Inertia::render('Reports/Edit', [
             'report' => [
                 'id' => $report->id,
                 'user_name' => $report->user_name,
                 'department' => $report->department,
                 'doc_name' => $report->doc_name,
-                'created_at' => $report->created_at,
+                'created_at' => $report->created_at->formatLocalized('%A, %d %B %Y %H:%M'),
             ],
         ]);   
     }

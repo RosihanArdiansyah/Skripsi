@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Docs;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Validation\Rule;
 use Inertia\Inertia;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
+        DB::statement('SET lc_time_names = "id_ID"');
         return Inertia::render('Dashboard/Index',[
             'docs' => Auth::user()->account->docs()
             	->select('department',DB::raw('count(department) as total'))
