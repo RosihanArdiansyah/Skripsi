@@ -47,10 +47,11 @@ class DocsController extends Controller
         ]);
     }
 
-    public function skripsi()
+    public function searchIndex($doc)
     {
     return Inertia::render('Documents/Index', [
             'page' => Docs::paginate(5),
+            'src' => ['val' => $doc],
             'filters' => Request::all('search', 'trashed','types'),
             'types' => Auth::user()->account->types()
                 ->orderBy('name')
@@ -58,42 +59,8 @@ class DocsController extends Controller
                 ->map
                 ->only('id', 'name'),
             'docs' => Auth::user()->account->docs()
-                ->with('typeDocs')
                 ->orderBy('docs_name')
-                ->filter(Request::only('search', 'trashed'))
-                ->paginate(5)
-                ->withQueryString()
-                ->through(function ($docs) {
-                    return [
-                        'id' => $docs->id,
-                        'docs_name' => $docs->docs_name,
-                        'types_id' => $docs->types_id,
-                        'author'=>$docs->author,
-                        'publisher'=>$docs->publisher,
-                        'department'=>$docs->department,
-                        'NIM'=>$docs->NIM,
-                        'year'=>$docs->year,
-                        'deleted_at' => $docs->deleted_at,
-                        'pdf'=> $docs->files,
-                    ];
-                }),
-        ]);
-    }
-
-    public function searchIndex($doc)
-    {
-    return Inertia::render('Documents/Index', [
-            'page' => Docs::paginate(5),
-            'src' => ['val' => $doc],
-            'filters' => Request::all('search', 'trashed'),
-            'types' => Auth::user()->account->types()
-                ->orderBy('name')
-                ->get()
-                ->map
-                ->only('id', 'name'),
-            'docs' => Auth::user()->account->docs()
-                ->orderBy('docs_name')
-                ->filter(Request::only('search', 'trashed'))
+                ->filter(Request::only('search', 'trashed','types'))
                 ->paginate()
                 ->withQueryString()
                 ->through(function ($docs) {
