@@ -148,6 +148,10 @@ Route::get('reports', [ReportsController::class, 'index'])
     ->name('reports')
     ->middleware('auth');
 
+Route::get('reports/rMonth', [ReportsController::class, 'rMonth'])
+    ->name('reports.monthly')
+    ->middleware('auth');
+
 // Route::post('reports', [ReportsController::class, 'store'])
 //     ->name('reports.store')
 //     ->middleware('auth');

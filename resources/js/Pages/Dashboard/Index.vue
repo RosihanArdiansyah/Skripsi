@@ -19,7 +19,7 @@
         </tr>
       </table>
     </div>
-    <div class="mt-8 bg-white rounded-md shadow overflow-x-auto">
+    <!-- <div class="mt-8 bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full table-auto whitespace-normal break-all lg:break-words">
         <tr class="text-left font-bold">
           <th class="px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600">Bulan</th>
@@ -36,7 +36,7 @@
           </td>
         </tr>
       </table>
-    </div>
+    </div> -->
   </div>
 </template>
 

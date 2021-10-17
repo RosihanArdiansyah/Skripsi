@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 
 class ReportsController extends Controller
 {
@@ -48,6 +48,29 @@ class ReportsController extends Controller
                 'created_at' => $report->created_at->formatLocalized('%A, %d %B %Y %H:%M'),
             ],
         ]);   
+    }
+
+    public function rMonth()
+    {
+        DB::statement('SET lc_time_names = "id_ID"');
+        return Inertia::render('Reports/Monthly', [
+            'page' => Reports::paginate(5),
+            'filters' => Request::all('search', 'trashed'),
+            'reports' => Auth::user()->account->reports()
+                ->select('created_at',DB::raw('count(created_at) as total'),DB::raw('DATE_FORMAT(created_at,"%M %Y") as months'))
+                ->where("created_at", ">", now()->format('M'))
+                ->orderBy('months') 
+                ->groupBy('months')
+                ->get()
+                // ->paginate(5)
+                // ->withQueryString()
+                ->transform(function ($report) {
+                    return [
+                        'month'=>$report->months,
+                        'sum'=>$report->total
+                    ]; 
+                }),
+        ]);
     }
 
     // public function create()
