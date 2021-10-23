@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('email', 50)->unique();
             $table->string('password')->nullable();
             $table->boolean('owner')->default(false);
+            $table->boolean('status')->default(false);
             $table->string('photo_path', 100)->nullable();
             $table->rememberToken();
             $table->timestamps();

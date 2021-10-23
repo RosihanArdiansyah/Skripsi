@@ -4,6 +4,10 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use App\Models\User;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -36,6 +40,9 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request)
     {
+        if(Auth::check()){
+            User::where('id',Auth::user()->id)->update(['status' => true]);
+        }
         return array_merge(parent::share($request), [
             'auth' => function () use ($request) {
                 return [
@@ -45,6 +52,7 @@ class HandleInertiaRequests extends Middleware
                         'last_name' => $request->user()->last_name,
                         'email' => $request->user()->email,
                         'owner' => $request->user()->owner,
+                        'status' => $request->user()->status,
                         'NIM' => $request->user()->NIM,
                         'department' => $request->user()->department,
                         'account' => [

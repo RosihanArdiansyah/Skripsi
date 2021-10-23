@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Inertia\Inertia;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -37,5 +39,12 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         return Inertia::render('Auth/Login');
+    }
+
+    public function LogOut() {
+        User::where('id',Auth::user()->id)->update(['status' => false]);
+        Auth::logout();
+    
+        return redirect('login');
     }
 }

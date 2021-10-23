@@ -24,16 +24,27 @@ class DashboardController extends Controller
                         'sum'=>$docs->total
                     ];
                 }),
-            'reports' => Auth::user()->account->reports()
-            	->select('created_at',DB::raw('count(created_at) as total'),DB::raw('DATE_FORMAT(created_at,"%M %Y") as months'))
-                ->where("created_at", ">", now()->format('M'))
-                ->orderBy('months') 
-                ->groupBy('months')
+            // 'reports' => Auth::user()->account->reports()
+            // 	->select('created_at',DB::raw('count(created_at) as total'),DB::raw('DATE_FORMAT(created_at,"%M %Y") as months'))
+            //     ->where("created_at", ">", now()->format('M'))
+            //     ->orderBy('months') 
+            //     ->groupBy('months')
+            //     ->get()
+            //     ->transform(function ($reports) {
+            //         return [
+            //             'month'=>$reports->months,
+            //             'sum'=>$reports->total
+            //         ];
+            //     }),
+            'user' => Auth::user()->account->users()
+            	->select('status',DB::raw('count(status) as online'))
+                ->where('status',1)
+                ->orderBy('department') 
+                ->groupBy('department')
                 ->get()
-                ->transform(function ($reports) {
+                ->transform(function ($docs) {
                     return [
-                        'month'=>$reports->months,
-                        'sum'=>$reports->total
+                        'online'=>$docs->online
                     ];
                 }),
             ]);

@@ -1,6 +1,14 @@
 <template>
   <div>
     <h1 class="mb-8 font-bold text-3xl">Dashboard</h1>
+    <div class="mb-8 w-1/4 bg-white rounded-md shadow overflow-x-auto">
+      <table class="w-full table-auto whitespace-normal break-all lg:break-words">
+        <tr v-for="users in user" :key="users.online" class="text-left font-bold">
+          <th class="px-6 pt-6 pb-4 font-bold uppercase bg-green-600 text-white">User Online</th>
+          <th class="px-6 pt-6 pb-4 font-bold uppercase bg-green-600 text-white">{{ users.online }}</th>
+        </tr>
+      </table>
+    </div>
     <div class="bg-white rounded-md shadow overflow-x-auto">
       <table class="w-full table-auto whitespace-normal break-all lg:break-words">
         <tr class="text-left font-bold">
@@ -49,12 +57,12 @@ export default {
   layout: Layout,
   props: {
     docs: Array,
-    reports: Array,
+    user: Array,
   },
   created(){
     console.log(this.$page.props.auth.user)
     console.log(this.docs)
-    console.log(this.reports)
+    console.log(this.user)
   },
 }
 </script>
