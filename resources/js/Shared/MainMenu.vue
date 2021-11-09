@@ -34,11 +34,11 @@
           <div :class="isUrl('types') ? 'text-white' : 'text-yellow-300 group-hover:text-white'">Jenis Buku</div>
         </inertia-link>
       </div>
-      <div class="mb-4">
-        <button class="flex items-center group py-3" @click="anu">
+      <div class="mb-4"> 
+        <inertia-link class="flex items-center group py-3" :href="route('reports')">
           <icon name="printer" class="w-4 h-4 mr-2" :class="isUrl('reports') ? 'fill-white' : 'fill-yellow-400 group-hover:fill-white'" />
           <div :class="isUrl('reports') ? 'text-white' : 'text-yellow-300 group-hover:text-white'">Laporan</div>
-        </button>
+        </inertia-link>
       </div>
     </div>
   </div>
@@ -59,11 +59,11 @@ export default {
       }
       return urls.filter(url => currentUrl.startsWith(url)).length
     },
-    anu() {
-      if (confirm('Apakah anda ingin melihat laporan bulanan?')) {
-        this.$inertia.get(this.route('reports.monthly'))
-      } else this.$inertia.get(this.route('reports'))
-    },
+    // anu() {
+    //   if (confirm('Apakah anda ingin melihat laporan bulanan?')) {
+    //     this.$inertia.get(this.route('reports.monthly'))
+    //   } else this.$inertia.get(this.route('reports'))
+    // },
   },
 }
 </script>

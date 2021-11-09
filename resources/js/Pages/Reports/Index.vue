@@ -3,13 +3,35 @@
     <h1 class="mb-8 font-bold text-3xl">Laporan</h1>
     <div class="mb-6 flex justify-between items-center">
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
-        <label class="mt-4 block text-gray-700">Trashed:</label>
-        <select v-model="form.trashed" class="mt-1 w-full form-select">
+        <label class="hidden mt-4 block text-gray-700">Trashed:</label>
+        <select v-model="form.trashed" class="hidden mt-1 w-full form-select">
           <option :value="null" />
           <option value="with">With Trashed</option>
           <option value="only">Only Trashed</option>
         </select>
+        <label class="mt-4 block text-gray-700">Bulan:</label>
+        <select v-model="form.monthly" class="mt-1 w-full form-select">
+          <option :value="null" />
+          <option value="01">Januari</option>
+          <option value="02">Februari</option>
+          <option value="03">Maret</option>
+          <option value="04">April</option>
+          <option value="05">Mei</option>
+          <option value="06">Juni</option>
+          <option value="07">Juli</option>
+          <option value="08">Agustus</option>
+          <option value="09">September</option>
+          <option value="10">Oktober</option>
+          <option value="11">November</option>
+          <option value="12">Desember</option>
+        </select>
       </search-filter>
+    </div>
+    <div class="mb-6 flex justify-between items-center">
+      <inertia-link class="btn-indigo" :href="route('reports.monthly')">
+        <span>Transaksi</span>
+        <span class="hidden md:inline">Bulanan</span>
+      </inertia-link>
     </div>
     <div class="bg-white rounded-md shadow overflow-x">
       <table class="w-full table-fixed break-all md:break-words whitespace-normal">
@@ -83,6 +105,7 @@ export default {
       form: {
         search: this.filters.search,
         trashed: this.filters.trashed,
+        monthly: this.filters.monthly,
       },
     }
   },
@@ -98,11 +121,13 @@ export default {
   mounted(){
     this.form.search = null
     this.form.trashed = null
+    this.form.monthly = null
     console.log(this.reports)
   },
   methods: {
     reset() {
       this.form.search = null
+      this.form.monthly = null
     },
   },
 }

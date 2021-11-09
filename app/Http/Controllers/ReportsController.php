@@ -17,10 +17,10 @@ class ReportsController extends Controller
         setlocale(LC_TIME, 'Indonesian');
         return Inertia::render('Reports/Index', [
             'page' => Reports::paginate(5),
-            'filters' => Request::all('search', 'trashed'),
+            'filters' => Request::all('search', 'trashed','monthly'),
             'reports' => Auth::user()->account->reports()
                 ->orderBy('created_at')
-                ->filter(Request::only('search', 'trashed'))
+                ->filter(Request::only('search', 'trashed','monthly')) 
                 ->paginate(5)
                 ->withQueryString()
                 ->through(function ($report) {

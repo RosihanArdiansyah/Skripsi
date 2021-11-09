@@ -21,13 +21,17 @@ class Reports extends Model
     public function scopeFilter($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('name', 'like', '%'.$search.'%');
+            $query->where('user_name', 'like', '%'.$search.'%')
+            ->orWhere('department', 'like', '%'.$search.'%')
+            ->orWhere('docs_name', 'like', '%'.$search.'%');
         })->when($filters['trashed'] ?? null, function ($query, $trashed) {
             if ($trashed === 'with') {
                 $query->withTrashed();
             } elseif ($trashed === 'only') {
                 $query->onlyTrashed();
             }
+        })->when($filters['monthly'] ?? null, function ($query, $monthly) {
+            $query->where('created_at',  'like', '%'.$monthly.'%');
         });
     }
 }

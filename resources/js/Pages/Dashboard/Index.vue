@@ -1,11 +1,14 @@
 <template>
   <div>
     <h1 class="mb-8 font-bold text-3xl">Dashboard</h1>
-    <div class="mb-8 w-1/4 bg-white rounded-md shadow overflow-x-auto">
-      <table class="w-full table-auto whitespace-normal break-all lg:break-words">
+    <div class="mb-8 w-1/3 md:w-1/4 bg-white rounded-md shadow overflow-x-auto">
+      <table class="w-full table-auto whitespace-normal lg:break-words">
         <tr v-for="users in user" :key="users.online" class="text-left font-bold">
-          <th class="px-6 pt-6 pb-4 font-bold uppercase bg-green-600 text-white">User Online</th>
-          <th class="px-6 pt-6 pb-4 font-bold uppercase bg-green-600 text-white">{{ users.online }}</th>
+          <th class="hidden md:block px-6 pt-6 pb-4 font-bold uppercase bg-green-600 text-white">User Online</th>
+          <th class="md:hidden px-4 pt-4 pb-4 font-bold uppercase bg-green-600">
+            <icon name="users" class="w-4 h-4 mr-2 fill-white" />
+          </th>
+          <th class="px-4 md:px-6 pt-4 md:pt-6 pb-4 font-bold uppercase bg-green-600 text-white">{{ users.online }}</th>
         </tr>
       </table>
     </div>
@@ -50,10 +53,14 @@
 
 <script>
 import Layout from '@/Shared/Layout'
+import Icon from '@/Shared/Icon'
 
 export default {
   metaInfo: { title: 'Dashboard' },
   
+  components: {
+    Icon,
+  },
   layout: Layout,
   props: {
     docs: Array,
