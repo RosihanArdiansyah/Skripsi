@@ -5,8 +5,8 @@
       <search-filter v-model="form.search" class="w-full max-w-md mr-4" @reset="reset">
         <select v-model="form.role" class="hidden mt-1 w-full form-select">
           <option :value="null" />
-          <option value="user">User</option>
-          <option value="owner">Owner</option>
+          <option value="pemustaka">Pemustaka</option>
+          <option value="pustakawan">Pustakawan</option>
         </select>
         <label class="mt-4 block text-gray-700">Trashed:</label>
         <select v-model="form.trashed" class="mt-1 w-full form-select">
@@ -47,7 +47,7 @@
           <td class="border-t block md:table-cell relative md:static">
             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Role</span>
             <inertia-link class="px-6 py-4 flex items-center" :href="route('users.edit', user.id)" tabindex="-1">
-              {{ user.owner ? 'Owner' : 'User' }}
+              {{ user.owner ? 'Pustakawan' : 'Pemustaka' }}
             </inertia-link>
           </td>
         </tr>
@@ -101,7 +101,7 @@ export default {
   },
   mounted(){
     this.form.search = null
-    this.form.role = 'user'
+    this.form.role = 'pemustaka'
     this.form.trashed = 'with'
     console.log(this.$page.props.auth.user)
   },

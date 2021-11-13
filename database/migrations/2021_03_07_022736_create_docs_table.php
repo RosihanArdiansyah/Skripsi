@@ -23,6 +23,8 @@ class CreateDocsTable extends Migration
             $table->string('NIM', 100);
             $table->string('department', 100);
             $table->integer('year', 4);
+            $table->integer('stok_buku', 100)->default(1);
+            $table->boolean('status')->default(true);
             $table->integer('end_page', 4)->default(25);
             $table->string('book_code', 100)->nullable();
             $table->string('files', 100)->nullable();

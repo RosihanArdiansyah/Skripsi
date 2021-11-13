@@ -14,6 +14,10 @@ class Docs extends Model
 {
     use SoftDeletes;
 
+    protected $casts = [
+        'status' => 'boolean', 
+    ];
+
      public function filesUrl()
     {
         if ($this->files) {

@@ -17,6 +17,11 @@
           </select-input>
           <text-input v-model="form.NIM" autocomplete="off" :error="form.errors.NIM" class="pr-6 pb-8 w-full" label="Stambuk" />
           <num-input v-model="form.year" autocomplete="off" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Tahun" />
+          <select-input v-model="form.status" :error="form.errors.status" class="hidden pr-6 pb-8 w-full" label="Status Buku">
+            <option :value="true">Tersedia</option>
+            <option :value="false">Tidak Tersedia</option>
+          </select-input>
+          <num-input v-model="form.stok_buku" autocomplete="off" :error="form.errors.stok_buku" class="pr-6 pb-8 w-full" label="Stok Buku" />
           <text-input v-model="form.department" autocomplete="off" :error="form.errors.department" class="pr-6 pb-8 w-full" label="Departemen" />
           <file-input v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full" type="file" accept=".pdf" label="File PDF" />
         </div>
@@ -62,6 +67,8 @@ export default {
         publisher:null,
         NIM:null,
         year:null,
+        status:true,
+        stok_buku:null,
         department:null,
         pdf:null,
       }),

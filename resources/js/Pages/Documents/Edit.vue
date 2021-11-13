@@ -16,12 +16,17 @@
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.author" :error="form.errors.author" class="pr-6 pb-8 w-full" label="Pengarang" />
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.publisher" :error="form.errors.publisher" class="pr-6 pb-8 w-full" label="Penerbit" />
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.book_code" :error="form.errors.book_code" class="pr-6 pb-8 w-full" label="Kode Buku" />
-          <select-input v-model="form.types_id" :error="form.errors.types_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Jenis Buku">
+          <select-input v-if="$page.props.auth.user.owner == 1" v-model="form.types_id" :error="form.errors.types_id" class="pr-6 pb-8 w-full lg:w-1/2" label="Jenis Buku">
             <option :value="form.types_id" />
             <option v-for="type in types" :key="type.id" :value="type.id">{{ type.name }}</option>
           </select-input>
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.NIM" :error="form.errors.NIM" class="pr-6 pb-8 w-full" label="Stambuk" />
           <num-input v-if="$page.props.auth.user.owner == 1" v-model="form.year" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Tahun" />
+          <num-input v-if="$page.props.auth.user.owner == 1" v-model="form.year" autocomplete="off" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Tahun" />
+          <select-input v-if="$page.props.auth.user.owner == 1" v-model="form.status" :error="form.errors.status" class="hidden pr-6 pb-8 w-full" label="Status Buku">
+            <option :value="true">Tersedia</option>
+            <option :value="false">Tidak Tersedia</option>
+          </select-input>
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.department" :error="form.errors.department" class="pr-6 pb-8 w-full" label="Department" />
           <file-input v-if="$page.props.auth.user.owner == 1" v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full" type="file" accept=".pdf" label="PDF Files" />
           <div v-if="$page.props.auth.user.owner == 0">
@@ -32,6 +37,9 @@
             <!-- <span v-for="type in types" :key="type.id" :value="type.id" class="pr-6 pb-8 w-full" label="Jenis Buku"> {{ type.name }} </span> -->
             <span v-if="doc.NIM" class="pr-6 pb-8 w-full" label="Stambuk"> {{ form.NIM }} </span>
             <span class="pr-6 pb-8 w-full" label="Tahun"> {{ form.year }} </span>
+            <span class="pr-6 pb-8 w-full" label="Stok Buku"> {{ form.stok_buku }} </span>
+            <span v-if="doc.status == 1" class="pr-6 pb-8 w-full text-green" label="Status"> Tersedia </span>
+            <span v-if="doc.status == 0" class="pr-6 pb-8 w-full text-red" label="Status"> Tidak Tersedia </span>
             <span v-if="doc.department" class="pr-6 pb-8 w-full" label="Department"> {{ form.department }} </span>
           </div>
         </div>
@@ -87,6 +95,8 @@ export default {
         publisher:this.doc.publisher,
         NIM:this.doc.NIM,
         year:this.doc.year,
+        stok_buku:this.doc.stok_buku,
+        status: this.doc.status,
         department:this.doc.department,
         pdf: null,
       }),

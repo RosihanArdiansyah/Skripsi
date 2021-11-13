@@ -40,6 +40,8 @@ class DocsController extends Controller
                         'department'=>$docs->department,
                         'NIM'=>$docs->NIM,
                         'year'=>$docs->year,
+                        'stok_buku'=>$docs->stok_buku,
+                        'status'=>$docs->status,
                         'deleted_at' => $docs->deleted_at,
                         'pdf'=> $docs->files,
                     ];
@@ -73,6 +75,8 @@ class DocsController extends Controller
                         'department'=>$docs->department,
                         'NIM'=>$docs->NIM,
                         'year'=>$docs->year,
+                        'stok_buku'=>$docs->stok_buku,
+                        'status'=>$docs->status,
                         'deleted_at' => $docs->deleted_at,
                         'pdf'=> $docs->files,
                     ];
@@ -104,6 +108,8 @@ class DocsController extends Controller
                 'publisher' => ['nullable', 'max:191'],
                 'NIM' => ['nullable', 'max:100'],
                 'year' => ['required', 'max:4'],
+                'stok_buku' => ['nullable', 'max:100'],
+                'status' => ['required','boolean'],
                 'department' => ['nullable', 'max:100'],
                 'pdf' => ['nullable', 'file'],
         ]);
@@ -122,6 +128,8 @@ class DocsController extends Controller
             'publisher' => Request::get('publisher'),
             'NIM' => Request::get('NIM'),
             'year' => Request::get('year'),
+            'stok_buku' => Request::get('stok_buku'),
+            'status' => Request::get('status'),
             'department' => Request::get('department'),
             'files' => Request::file('pdf') ? Request::file('pdf')->storePubliclyAs('docs',$nim.'_'.$name.'.'.$docName) : null,
         ]);
@@ -142,6 +150,8 @@ class DocsController extends Controller
                 'department'=>$doc->department,
                 'NIM'=>$doc->NIM,
                 'year'=>$doc->year,
+                'stok_buku'=>$doc->stok_buku,
+                'status'=>$doc->status,
                 'deleted_at' => $doc->deleted_at,
                 'pdf'=> $doc->files,
             ],
@@ -179,13 +189,15 @@ class DocsController extends Controller
             'NIM' => ['nullable', 'max:100'],
             'year' => ['required', 'max:4'],
             'department' => ['nullable', 'max:100'],
+            'stok_buku' => ['nullable', 'max:100'],
+            'status' => ['required','boolean'],
             'pdf' => ['nullable', 'file'],
         ]);
 
         $name = str_replace(' ','_',Request::get('author'));
         $nim = Request::get('NIM');
 
-        $doc->update(Request::only('docs_name','author','publisher','department','NIM','year','types_id'));
+        $doc->update(Request::only('docs_name','author','publisher','department','NIM','year','types_id','stok_buku','status'));
 
         if (Request::file('pdf')) {
             $docName = Request::file('pdf')->getClientOriginalExtension();
