@@ -1,7 +1,7 @@
 <template>
   <div class="p-6 bg-red-800 min-h-screen flex justify-center items-center">
-    <div class="w-full max-w-md">
-      <form class="mt-8 bg-white rounded-lg shadow-xl overflow-hidden" @submit.prevent="login">
+    <div class="w-full bg-white rounded-lg max-w-md">
+      <form class="mt-8 shadow-xl overflow-hidden" @submit.prevent="login">
         <div class="px-10 py-12">
           <h1 class="text-center font-bold text-3xl">Selamat Datang</h1>
           <div class="mx-auto mt-6 w-24 border-b-2" />
@@ -17,6 +17,9 @@
           <loading-button :loading="form.processing" class="btn-indigo" type="submit">Login</loading-button>
         </div>
       </form>
+      <div class="px-10 py-4 bg-gray-100 border-t border-gray-100 flex justify-center items-center">
+        <button class="btn-indigo" @click="guest()">Masuk sebagai Guest</button>
+      </div>
     </div>
   </div>
 </template>
@@ -49,6 +52,9 @@ export default {
           remember: data.remember ? 'on' : '',
         }))
         .post(this.route('login.attempt'))
+    },
+    guest(){
+      this.$inertia.get(this.route('guest'))
     },
   },
 }

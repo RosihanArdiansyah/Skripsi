@@ -7,6 +7,7 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DocsController;
 use App\Http\Controllers\TypesController;
+use App\Http\Controllers\GuestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,12 @@ Route::post('login', [LoginController::class, 'login'])
 
 Route::post('logout', [LoginController::class, 'logout'])
     ->name('logout');
+
+// Guest
+
+Route::get('guest', [GuestController::class, 'index'])
+    ->name('guest')
+    ->middleware('guest');
 
 // Dashboard
 

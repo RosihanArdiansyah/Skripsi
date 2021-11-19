@@ -16,18 +16,21 @@
             </dropdown>
           </div>
           <div class="bg-white border-b w-full p-4 md:py-0 md:px-12 text-sm md:text-md flex justify-between items-center">
-            <div class="mt-1 mr-4">{{ $page.props.auth.user.account.name }}</div>
+            <div v-if="$page.props.auth.user" class="mt-1 mr-4">{{ $page.props.auth.user.account.name }}</div>
             <dropdown class="mt-1" placement="bottom-end"> 
               <div class="flex items-center cursor-pointer select-none group">
-                <div class="text-gray-700 group-hover:text-red-600 focus:text-red-600 mr-1 whitespace-nowrap">
+                <div v-if="$page.props.auth.user" class="text-gray-700 group-hover:text-red-600 focus:text-red-600 mr-1 whitespace-nowrap">
                   <span>{{ $page.props.auth.user.first_name }}</span>
                   <span class="hidden md:inline">{{ $page.props.auth.user.last_name }}</span>
                 </div>
                 <icon class="w-5 h-5 group-hover:fill-red-600 fill-gray-700 focus:fill-red-600" name="cheveron-down" />
               </div>
-              <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
+              <div v-if="$page.props.auth.user" slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
                 <inertia-link class="block px-6 py-2 hover:bg-red-500 hover:text-white" :href="route('users.edit', $page.props.auth.user.id)">Profil</inertia-link>
                 <inertia-link class="block px-6 py-2 hover:bg-red-500 hover:text-white w-full text-left" :href="route('logout')" method="post" as="button">Keluar</inertia-link>
+              </div>
+              <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
+                <inertia-link class="block px-6 py-2 hover:bg-red-500 hover:text-white w-full text-left" :href="route('login')" method="get" as="button">Keluar</inertia-link>
               </div>
             </dropdown>
           </div>
