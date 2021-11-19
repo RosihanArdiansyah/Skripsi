@@ -17,7 +17,7 @@
           </select-input>
           <text-input v-model="form.NIM" autocomplete="off" :error="form.errors.NIM" class="pr-6 pb-8 w-full" label="Stambuk" />
           <num-input v-model="form.year" autocomplete="off" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Tahun" />
-          <select-input v-model="form.status" :error="form.errors.status" class="hidden pr-6 pb-8 w-full" label="Status Buku">
+          <select-input v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full" label="Status Buku">
             <option :value="true">Tersedia</option>
             <option :value="false">Tidak Tersedia</option>
           </select-input>

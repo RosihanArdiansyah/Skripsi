@@ -22,11 +22,11 @@
           </select-input>
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.NIM" :error="form.errors.NIM" class="pr-6 pb-8 w-full" label="Stambuk" />
           <num-input v-if="$page.props.auth.user.owner == 1" v-model="form.year" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Tahun" />
-          <num-input v-if="$page.props.auth.user.owner == 1" v-model="form.year" autocomplete="off" :error="form.errors.year" class="pr-6 pb-8 w-full" label="Tahun" />
-          <select-input v-if="$page.props.auth.user.owner == 1" v-model="form.status" :error="form.errors.status" class="hidden pr-6 pb-8 w-full" label="Status Buku">
+          <select-input v-if="$page.props.auth.user.owner == 1" v-model="form.status" :error="form.errors.status" class="pr-6 pb-8 w-full" label="Status Buku">
             <option :value="true">Tersedia</option>
             <option :value="false">Tidak Tersedia</option>
           </select-input>
+          <num-input v-if="$page.props.auth.user.owner == 1" v-model="form.stok_buku" autocomplete="off" :error="form.errors.stok_buku" class="pr-6 pb-8 w-full" label="Stok Buku" />
           <text-input v-if="$page.props.auth.user.owner == 1" v-model="form.department" :error="form.errors.department" class="pr-6 pb-8 w-full" label="Department" />
           <file-input v-if="$page.props.auth.user.owner == 1" v-model="form.pdf" :error="form.errors.pdf" class="pr-6 pb-8 w-full" type="file" accept=".pdf" label="PDF Files" />
           <div v-if="$page.props.auth.user.owner == 0">

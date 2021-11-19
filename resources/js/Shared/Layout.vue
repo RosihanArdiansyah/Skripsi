@@ -29,7 +29,7 @@
                 <inertia-link class="block px-6 py-2 hover:bg-red-500 hover:text-white" :href="route('users.edit', $page.props.auth.user.id)">Profil</inertia-link>
                 <inertia-link class="block px-6 py-2 hover:bg-red-500 hover:text-white w-full text-left" :href="route('logout')" method="post" as="button">Keluar</inertia-link>
               </div>
-              <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
+              <div v-else slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
                 <inertia-link class="block px-6 py-2 hover:bg-red-500 hover:text-white w-full text-left" :href="route('login')" method="get" as="button">Keluar</inertia-link>
               </div>
             </dropdown>
