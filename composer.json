@@ -55,7 +55,8 @@
     "prefer-stable": true,
     "scripts": {
         "compile": [
-            "npm run production"
+            "npm run prod",
+            "@php artisan migrate:fresh --seed"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
