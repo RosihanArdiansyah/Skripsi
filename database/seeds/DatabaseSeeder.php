@@ -1,9 +1,7 @@
 <?php
 
 use App\Models\Account;
-use App\Models\Organization;
 use App\Models\User;
-use App\Models\Docs;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,9 +20,5 @@ class DatabaseSeeder extends Seeder
 
         factory(User::class, 5)->create(['account_id' => $account->id]);
 
-        factory(Docs::class, 100)
-            ->create(['account_id' => $account->id]);
-
-        
     }
 }

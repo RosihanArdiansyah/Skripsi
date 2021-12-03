@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateUsersTable extends Migration
 {
@@ -18,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->integer('account_id')->index();
             $table->string('first_name', 25);
             $table->string('last_name', 25);
-            $table->string('NIM', 25);
-            $table->string('department', 25);
+            $table->string('NIM', 25)->nullable();
+            $table->string('department', 25)->nullable();
             $table->string('email', 50)->unique();
             $table->string('password')->nullable();
             $table->boolean('owner')->default(false);
