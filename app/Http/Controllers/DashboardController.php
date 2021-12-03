@@ -10,7 +10,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        DB::statement('SET lc_time_names = "id_ID"');
         return Inertia::render('Dashboard/Index',[
             'docs' => Auth::user()->account->docs()
             	->select('department',DB::raw('count(department) as total'))
