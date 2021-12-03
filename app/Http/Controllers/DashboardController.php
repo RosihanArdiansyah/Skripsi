@@ -38,6 +38,7 @@ class DashboardController extends Controller
             'user' => Auth::user()->account->users()
             	->select('status',DB::raw('count(status) as online'))
                 ->where('status',1)
+                ->groupBy('status')
                 ->get()
                 ->transform(function ($docs) {
                     return [
