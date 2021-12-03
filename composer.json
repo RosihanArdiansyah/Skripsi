@@ -60,7 +60,8 @@
     "scripts": {
         "compile": [
             "npm run prod",
-            "@php artisan migrate:fresh --seed"
+            "@php artisan migrate:fresh --seed",
+            "@php artisan storage:link"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
