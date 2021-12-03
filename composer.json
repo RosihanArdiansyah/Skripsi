@@ -28,6 +28,9 @@
         "reinink/remember-query-strings": "^0.1.0",
         "tightenco/ziggy": "^0.8.0"
     },
+    "require-dev": {
+        "heroku/heroku-buildpack-php" : "dev-master"
+    },
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
