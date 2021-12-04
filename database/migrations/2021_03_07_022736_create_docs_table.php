@@ -19,9 +19,9 @@ class CreateDocsTable extends Migration
             $table->integer('types_id')->index();
             $table->string('docs_name', 100);
             $table->string('author', 100);            
-            $table->string('publisher', 191);
-            $table->string('NIM', 100);
-            $table->string('department', 100);
+            $table->string('publisher', 191)->nullable();
+            $table->string('NIM', 100)->nullable();
+            $table->string('department', 100)->nullable();
             $table->integer('year');
             $table->integer('stok_buku')->default(1);
             $table->boolean('status')->default(true);
