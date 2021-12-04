@@ -18,7 +18,7 @@
     <div class="bg-white rounded-md shadow overflow-x">
       <table class="w-full table-fixed break-all md:break-words">
         <tr class="text-left font-bold">
-          <th class="w-1/2 px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600 hidden md:table-cell">Nama</th>
+          <th class="w-1/2 px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600 hidden md:table-cell">Judul</th>
           <th class="w-1/5 px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600 hidden md:table-cell">Pengarang</th>
           <th class="w-1/5 px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600 hidden md:table-cell">Departemen</th>
           <th class="w-1/5 px-6 pt-6 pb-4 font-bold uppercase bg-gray-200 text-gray-600 hidden md:table-cell">Status</th>
@@ -27,17 +27,20 @@
         flex md:table-row flex-col md:flex-row border-4 md:border flex-wrap md:flex-no-wrap"
         >
           <td class="pt-4 md:pt-0 md:border-t break-words block md:table-cell relative md:static">
+            <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Judul</span>
             <span class="px-6 py-4 flex items-center focus:text-indigo-500">
               {{ doc.docs_name }}
               <icon v-if="doc.deleted_at" name="trash" class="flex-shrink-0 w-3 h-3 fill-gray-400 ml-2" />
             </span>
           </td>
           <td class="border-t block md:table-cell relative md:static">
+            <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Pengarang</span>
             <span class="px-6 py-4 flex items-center" tabindex="-1">
               {{ doc.author }}
             </span>
           </td>
           <td class="border-t block md:table-cell relative md:static">
+            <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Departemen</span>
             <span class="px-6 py-4 flex items-center" tabindex="-1">
               {{ doc.department }}
             </span>
