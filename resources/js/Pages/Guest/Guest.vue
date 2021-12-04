@@ -101,13 +101,14 @@ export default {
     form: {
       handler: throttle(function() {
         let query = pickBy(this.form)
-        this.$inertia.replace(this.route('docs', Object.keys(query).length ? query : { remember: 'forget' }))
+        this.$inertia.replace(this.route('guest', Object.keys(query).length ? query : { remember: 'forget' }))
       }, 150),
       deep: true,
     }, 
   },
   created(){
     this.form.trashed = null
+    this.form.search = null
   },
   methods: {
     reset() {

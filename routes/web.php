@@ -38,7 +38,7 @@ Route::post('logout', [LoginController::class, 'logout'])
 
 Route::get('guest', [GuestController::class, 'index'])
     ->name('guest')
-    ->middleware('guest');
+    ->middleware('remember','guest');
 
 // Dashboard
 
