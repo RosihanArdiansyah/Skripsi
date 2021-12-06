@@ -45,14 +45,9 @@
               {{ doc.department }}
             </span>
           </td>
-          <td v-if="doc.status == true" class="border-t block md:table-cell relative md:static">
+          <td class="border-t block md:table-cell relative md:static">
             <span class="px-6 py-4 flex items-center" tabindex="-1">
-              Tersedia
-            </span>
-          </td>
-          <td v-if="doc.status == false" class="border-t block md:table-cell relative md:static">
-            <span class="px-6 py-4 flex items-center" tabindex="-1">
-              Tidak Tersedia
+              {{ doc.status }}
             </span>
           </td>
         </tr>
