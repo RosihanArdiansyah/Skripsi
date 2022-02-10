@@ -8,6 +8,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\DocsController;
 use App\Http\Controllers\TypesController;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\RentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,6 +45,10 @@ Route::get('guest', [GuestController::class, 'index'])
 
 Route::get('/', [DashboardController::class, 'index'])
     ->name('dashboard')
+    ->middleware('remember','auth');
+
+Route::get('rent', [RentController::class, 'index'])
+    ->name('rents')
     ->middleware('remember','auth');
 
 // Users
