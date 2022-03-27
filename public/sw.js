@@ -21,6 +21,20 @@ workbox.routing.registerRoute(
 )
 
 workbox.routing.registerRoute(
+  ({url}) => url.origin === self.location.origin &&
+             url.pathname.startsWith('/storage/'),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'docs',
+    plugins: [
+      new workbox.expiration.ExpirationPlugin({
+        maxEntries: 60,
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+      }),
+    ],
+  }),
+)
+
+workbox.routing.registerRoute(
   ({request}) => request.destination === 'script' ||
                     request.destination === 'style',
   new workbox.strategies.StaleWhileRevalidate({

@@ -31,6 +31,6 @@
         "workbox-cli": "6.1.5"
     },
     "devDependencies": {
-        "pdfjs-dist": "^2.0.943"
+        "pdfjs-dist": "2.0.943"
     }
 }
