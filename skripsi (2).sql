@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2022 at 01:27 PM
+-- Generation Time: Jun 30, 2022 at 02:18 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -50,7 +50,7 @@ INSERT INTO `accounts` (`id`, `name`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `docs` (
   `id` int(10) UNSIGNED NOT NULL,
   `account_id` int(11) NOT NULL DEFAULT 1,
-  `types_id` int(11) NOT NULL,
+  `types_id` int(11) NOT NULL DEFAULT 2,
   `docs_name` varchar(512) COLLATE utf8mb4_unicode_ci NOT NULL,
   `author` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `publisher` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -112,60 +112,61 @@ INSERT INTO `docs` (`id`, `account_id`, `types_id`, `docs_name`, `author`, `publ
 (42, 1, 1, 'Pengaruh Kemiringan dan diameter Tube Settler Terhadap Penurunan Nilai Kekeruhan dan Efesiensi Penyisihan Tss Pada  Reaktor Sedimentasi Rectangular', 'Andi Nur Qalbih I ', NULL, 'D12114313', 'TEKNIK LINGKUNGAN', 2021, 1, 1, 'SKR-2021 QAL          p', NULL, NULL, NULL, NULL),
 (43, 1, 1, 'Studi Perbandingan Estimasi Emisi Gas Rumah Kaca TPA Tamangapa ', 'Ernny Oktaflani Wunanto ', NULL, 'D12116011', 'TEKNIK LINGKUNGAN', 2021, 1, 1, 'SKR-2021 WUN          s', NULL, NULL, NULL, NULL),
 (44, 1, 1, 'Studi Potensi Pemanfaatan Limbah Sambut Kelapa Sebagai Pupuk Organik', 'Dewi Yunita Sari ', NULL, 'D12116512', 'TEKNIK LINGKUNGAN', 2021, 1, 1, 'SKR-2021 SAR           s', NULL, NULL, NULL, NULL),
-(45, 1, 2021, 'Alterasi dan Mineralisasi Hidrothermal Daerah Mamungaa, Kabupaten Bonebolango Propinsi Gorontalo', 'Djamal Adi Nugroho Uno ', NULL, 'D062191007', 'S2 TEKNIK GEOLOGI', 1, 1, 1, 'S2-2021 UNO          a', NULL, NULL, NULL, NULL),
-(46, 1, 2021, 'Analisis Karakteristik Batuan Perangkap Aspal Batu Buton (Asbuton ) Pada Blok Kabungka Tambang C Kabupaten Buton Sulawesi Tenggara', 'Isman Saleh ', NULL, 'D062191002', 'S2 TEKNIK GEOLOGI', 1, 1, 1, 'S2-2021 SAL            a', NULL, NULL, NULL, NULL),
-(47, 1, 2021, 'Deteksi Genangan Sampah Pada Permukaan Air Kanal Dengan Menggunakan Metode Deep Learning', 'Artamenia Khairunnisa Eka Amrullah ', NULL, 'D42115508', 'TEKNIK INFORMATIKA', 1, 1, 1, 'SKR-2021 AMR            d', NULL, NULL, NULL, NULL),
-(48, 1, 2021, 'Perancangan Sistem Online Monitoring Pembebanan Transformator Distribusi Menggunakan Wemos', 'Adnan Mujahid ', NULL, 'D41116009', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 MUJ          p', NULL, NULL, NULL, NULL),
-(49, 1, 2021, 'Perancangan Sistem Monitoring Aliran daya Menggunakan Mikrokontroller', 'Wira Aprianto Ilham ', NULL, 'D41116017', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 ILH            p', NULL, NULL, NULL, NULL),
-(50, 1, 2021, 'Rancang Bangun Generator Linier Untuk Konversi Energi Gelombang Air Laut', 'Ahmad Asadul Kadar ', NULL, 'D41116507', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 KAD           r ', NULL, NULL, NULL, NULL),
-(51, 1, 2021, 'Studi Potensi Pembangkit Listrik Tenaga Surya Berbasis Aplikasi Geographic Information System (GIS) Studi Kasus ', 'Fadli Alfiansyah ', NULL, 'D41116314', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 ALF            s ', NULL, NULL, NULL, NULL),
-(52, 1, 2021, 'Perancangan Kontrol Automatic  Transfer Switch (ATS) Berbasis Programmable Logic Control (PLC) Siemens Simatic S7-300', 'Muh Amri Arfah ', NULL, 'D41116006', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 ARF           p', NULL, NULL, NULL, NULL),
-(53, 1, 2021, 'Inverter DC-AC 220-230 VAC Pada Sistem Listrik Hibrid Energi Terbarukan Skala Rumah', 'Muhammad Aswan ', NULL, 'D41116312', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 ASW          i', NULL, NULL, NULL, NULL),
-(54, 1, 2021, 'Analisis Losses sistem distribusi 20 KV PT. PLN ULP Panakkukang Penyulang Antang Menggunakan Etap16.0', 'Andi Abdul Azis Mappabeta ', NULL, 'D41114528', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 MAP          a', NULL, NULL, NULL, NULL),
-(55, 1, 2021, 'Algoritma Hybrid PSO-BA (HPSOBA) Untuk Penyelesaian Optimal Reactive Power Flow (ORPF) Pada Aplikasi VSC-HVDC', 'Zulfiana Safitri Majid', NULL, NULL, 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 MAJ          a', NULL, NULL, NULL, NULL),
-(56, 1, 2021, 'Studi Kontingensi Sistem Interkoneksi Sulbagse', 'A. Anugrah Paranrengi ', NULL, 'D41116310', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 PAR          p', NULL, NULL, NULL, NULL),
-(57, 1, 2021, 'Analisis Formulasi Akurasi Posisi Distorsi Pada Efek Frequency Sharing Teknologi 5G', 'Reski Amalia ', NULL, 'D41171010', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 AMA          a', NULL, NULL, NULL, NULL),
-(58, 1, 2021, 'Perancangan Jaringan FTTH Menggunakan Aplikasi Optisystem, Tabel BOQ Dan Kurva S', 'Sri Rafika Muhtar ', NULL, 'D41171020', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 MUH          p', NULL, NULL, NULL, NULL),
-(59, 1, 2021, 'Kontrol Pengisian Baterai Otomatis Pada Sistem Keamana Rumah Berbasis IOT', 'Syahril Febriansyah ', NULL, 'D41116025', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 FEB            k', NULL, NULL, NULL, NULL),
-(60, 1, 2021, 'Pemodelan Simulink Heat Exchanger Pada Alat Boiler Heating Batching Control Trainer(Model:SE 107)', 'Fajri Tawakkal Ali ', NULL, 'D41114030', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 ALI            p', NULL, NULL, NULL, NULL),
-(61, 1, 2021, 'Optimisasi Daya Aktif PLTU 2 Sulawesi Utara (Amurang) Mempertimbangkan Emisi', 'Nurul Fadillah ', NULL, 'D41171005', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 FAD          o', NULL, NULL, NULL, NULL),
-(62, 1, 2021, 'Sistem Monitoring Volume Underground Tank SPBU Berbasis Mikrokontroler Raspberry PI', 'Siswono      ', NULL, 'D41114021', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 SIS             s', NULL, NULL, NULL, NULL),
-(63, 1, 2021, 'Pengembangan Teknologi Smart Hybrid Reader Untuk Sistem Smart Campus Unhas', 'Cahya Rezky Prihatmoko ', NULL, 'D41116013', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 PRI            p', NULL, NULL, NULL, NULL),
-(64, 1, 2021, 'Prototipe Sistem Pendingin (Freezer) Ikan Berbasis Energi Surya (Photovoltic) Pada Kapal Nelayan', 'Juarni ', NULL, 'D33114008', 'TEKNIK SISTEM PERKAPALAN', 1, 1, 1, 'SKR-2021 JUA           P           ', NULL, NULL, NULL, NULL),
-(65, 1, 2021, 'Desain Sistem Pendingin Penyimpanan Ikan Berbasis Energi Surya', 'Nurmainnah ', NULL, 'D33114003', 'TEKNIK SISTEM PERKAPALAN', 1, 1, 1, 'SKR-2021 NUR             d', NULL, NULL, NULL, NULL),
-(66, 1, 0, 'Rekayasa  Perangkat Lunak (Buku I', 'Roger S. Pressman', 'Yogyakarta: Andi, 2002', NULL, NULL, 2002, 4, 1, '005.1/PRE', NULL, NULL, NULL, NULL),
-(67, 1, 0, 'Rangkaian listrik Jilid Pertama', 'Budiono Mismail', 'Bandung: ITB,  1995', NULL, NULL, 1995, 4, 1, '537.6 / MIS', NULL, NULL, NULL, NULL),
-(68, 1, 0, 'Roh dan citra kota: Peran perancangan kota sebagai kebijakan public', 'Bambang Heryanto', 'Sidoarjo :Brillian International, 2011', NULL, NULL, 2011, 4, 1, '711.4/HER', NULL, NULL, NULL, NULL),
-(69, 1, 0, 'Rahasia mudah menguasai photoshop', 'MADCOMS', 'Yogyakarta: Andi, 2012', NULL, NULL, 2012, 1, 1, '006.69/MAD', NULL, NULL, NULL, NULL),
-(70, 1, 0, 'Riset Operasi dalam pendekatan algoritmis', 'Jong Jek Siang', 'Yogyakarta: Andi, 2011', NULL, NULL, 2011, 2, 1, '003 / SIA', NULL, NULL, NULL, NULL),
-(71, 1, 0, 'Rangkaian Lisitrik', 'Mohamad Ramdhani', 'Bandung : Erlangga, 2008', NULL, NULL, 2008, 2, 1, '537.6 / RAM', NULL, NULL, NULL, NULL),
-(72, 1, 0, 'Robot Vision : Teknik membangun robot cerdas masa depan', 'Widodo Budiharto, Djoko Purwanto', 'Yogyakarta: Andi, 2012', NULL, NULL, 2012, 1, 1, '629.892 / BUD', NULL, NULL, NULL, NULL),
-(73, 1, 0, 'Rekayasa Perangkat Lunak : Terstruktur dan berorientasi objek', 'Rosa A.S dan M. Shalahuddin', 'bandung : informatika, 2018', NULL, NULL, 2018, 3, 1, '005.1 / ROS', NULL, NULL, NULL, NULL),
-(74, 1, 0, 'Reformasi perkotaan : mencegah wilayah Urban menjadi human Zoo', 'Eko Budihardjo', 'Jakarta: Kompas Media Nusantara,2014', NULL, NULL, 2014, 1, 1, '338.9 /BUD', NULL, NULL, NULL, NULL),
-(75, 1, 0, 'Rekayasa Hidrologi, edisi 1 revisi', 'Lily Montarcih Limantara', 'Yogyakarta : Andi, 2018', NULL, NULL, 2018, 3, 1, '551.48 / LIM', NULL, NULL, NULL, NULL),
-(76, 1, 0, 'Rekayasa Sistem manufaktur : memahami proses manufaktur untuk mendukung implementasi proyek six sigma lebih efektif', 'Saluddin', 'Jakarta : Mitra Wacana Media, 2016', NULL, NULL, 2016, 2, 1, '658.5/SAL', NULL, NULL, NULL, NULL),
-(77, 1, 0, 'Rangkaian listrik ', 'H. Sianipar', 'Bandung: Rekayasa Sains. 2015', NULL, NULL, 2015, 1, 1, '537 / SIA', NULL, NULL, NULL, NULL),
-(78, 1, 0, 'Reading strategis: materials for english MKU for International Use Only', '', 'Makassar9/17/2019  English Departemen, 2008', NULL, NULL, 2008, 1, 1, '372.4 / REA', NULL, NULL, NULL, NULL),
-(79, 1, 0, 'Releproteksi : prinsip dan aplikasi', 'Hendra Martha Yudha', 'Fak. Teknik Univ. Sriwijaya', NULL, NULL, 2020, 1, 1, '693.898 /YUD', NULL, NULL, NULL, NULL),
-(80, 1, 0, 'Restorasi Sungai : River Restoration', 'Agus Maryono', 'Yogyakarta: UGM, 2018', NULL, NULL, 2018, 3, 1, '628.112 / MAR', NULL, NULL, NULL, NULL),
-(81, 1, 0, 'Riset Operasi edisi ke 2', 'Sri Mulyono', 'Jakarta:Mitra Wacana Media, 2017', NULL, NULL, 2017, 1, 1, '001.424 / MUL', NULL, NULL, NULL, NULL),
-(82, 1, 0, 'Rekayasa Lalu-Lintas edisi ke-2', 'Leksmono Suryo Putranto', 'Jakarta: Indek, 2019', NULL, NULL, 2019, 1, 1, '627.701 / PUT', NULL, NULL, NULL, NULL),
-(83, 1, 0, 'Rekayasa Gambut. Briket batubara dan sampah organik: Usaha memanfaatkan sumberdaya alam yang terpinggirkan', 'Sukandarrumidi', 'Yogyakarta: Gadjah Mada Univ. Press, 2009', NULL, NULL, 2009, 2, 1, '662.623 / SUK', NULL, NULL, NULL, NULL),
-(84, 1, 0, 'Reparasi sistem pendinginan mesin mobil  edisi revisi', 'Daryanto', 'Jakarta: Bumi Aksara, 2019', NULL, NULL, 2019, 2, 1, '629.277.2 / DAR', NULL, NULL, NULL, NULL),
-(85, 1, 0, 'Rangka Atap Baja Ringan untuk semua', 'Iden Wildensyah', 'Bandung: Alfabeta, 2013', NULL, NULL, 2013, 1, 1, '695 / WIL', NULL, NULL, NULL, NULL),
-(86, 1, 0, 'Riset Operasi : Teori dan aplikasi untuk pengambilan keputusan', 'Mohamad Wahdi', 'Yogyakarta: CAPS, 2011', NULL, NULL, 2011, 1, 1, '330 / WAH', NULL, NULL, NULL, NULL),
-(87, 1, 0, 'Riset operasi : untuk pengambilan keputusan edisi Revisi', 'Johannes Supranto', 'Jakarta: Univ. Indoensia, 2014', NULL, NULL, 2014, 1, 1, '658.403.4/SUP', NULL, NULL, NULL, NULL),
-(88, 1, 0, 'Rekayasa Perangkat Lunak', 'Janner Simarmata', 'Yogyakarta: Andi, 2010', NULL, NULL, 2010, 1, 1, '005.1 / SIM', NULL, NULL, NULL, NULL),
-(89, 1, 0, 'Robotika Modern : Teori + implermentasi  (edisi revisi', 'Widodo Budiharto, Djoko Purwanto', 'Yogyakarta: Andi, 2010', NULL, NULL, 2010, 2, 1, '629.892 /BUD', NULL, NULL, NULL, NULL),
-(90, 1, 0, 'Rangkaian listrik edisi kedua', 'Joseph A. Edminister', 'Jakarta: Erlangga, 1984', NULL, NULL, 1984, 1, 1, '537 / EDM', NULL, NULL, NULL, NULL),
-(91, 1, 0, 'Rekayasa Pondasi Teori dan penyelesaian soal', 'Bambang Surendro', 'Yogyakarta : Graha Ilmu. 2015', NULL, NULL, 2015, 1, 1, '624.107.6 / SUR', NULL, NULL, NULL, NULL),
-(92, 1, 0, 'Rangkaian listrik', 'Cekman Cekdin, Taufik Barlian', 'Yogyakarta : Andi, 2013', NULL, NULL, 2013, 1, 1, '621.381.5 / CEK', NULL, NULL, NULL, NULL),
-(93, 1, 0, 'Reliability Centred Maintenance', 'Hadi Pranoto', 'Yogyakarta:  Mitra Wacana Media, 2015', NULL, NULL, 2015, 1, 1, '620.004 / PRA', NULL, NULL, NULL, NULL),
-(94, 1, 0, 'Robotika modern : Teori & implementasi (edisi revisi', 'Widodo Budiharto', 'Yogyakarta: Andi, 2014', NULL, NULL, 2014, 1, 1, '629.892 / BUD', NULL, NULL, NULL, NULL),
-(95, 1, 0, 'Refregeration & air conditioning', 'Wilbert F. Stoecker, Jerold W. Jones', 'Mc.Graw-Hill Book Company, 1982', NULL, NULL, 1982, 1, 1, '621.5\'6', NULL, NULL, NULL, NULL),
-(96, 1, 0, 'Ruang dalam arsitektur edisi ketiga, revisi', 'Cornelis Van De Ven', 'Jakarta : Gramedia Pustaka Utama, 1991', NULL, NULL, 1991, 1, 1, '720 / VEN', NULL, NULL, NULL, NULL),
-(97, 1, 0, 'Reformasi pengelolaan sumber daya air ', 'Agus Maryono', 'Yogyakarta: Gadjah Mada Univ. Press, 2017', NULL, NULL, 2017, 1, 1, NULL, NULL, NULL, NULL, NULL),
-(98, 1, 0, 'Robotika modern  : Teori dan implementari (edisi baru', 'Widodo Buidhardi', 'Yogyakarta : Andi, 2914', NULL, NULL, 2014, 1, 1, '629.892/ WID', NULL, NULL, NULL, NULL);
+(45, 1, 1, 'Alterasi dan Mineralisasi Hidrothermal Daerah Mamungaa, Kabupaten Bonebolango Propinsi Gorontalo', 'Djamal Adi Nugroho Uno ', NULL, 'D062191007', 'S2 TEKNIK GEOLOGI', 1, 1, 1, 'S2-2021 UNO          a', NULL, NULL, NULL, NULL),
+(46, 1, 1, 'Analisis Karakteristik Batuan Perangkap Aspal Batu Buton (Asbuton ) Pada Blok Kabungka Tambang C Kabupaten Buton Sulawesi Tenggara', 'Isman Saleh ', NULL, 'D062191002', 'S2 TEKNIK GEOLOGI', 1, 1, 1, 'S2-2021 SAL            a', NULL, NULL, NULL, NULL),
+(47, 1, 1, 'Deteksi Genangan Sampah Pada Permukaan Air Kanal Dengan Menggunakan Metode Deep Learning', 'Artamenia Khairunnisa Eka Amrullah ', NULL, 'D42115508', 'TEKNIK INFORMATIKA', 1, 1, 1, 'SKR-2021 AMR            d', NULL, NULL, NULL, NULL),
+(48, 1, 1, 'Perancangan Sistem Online Monitoring Pembebanan Transformator Distribusi Menggunakan Wemos', 'Adnan Mujahid ', NULL, 'D41116009', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 MUJ          p', NULL, NULL, NULL, NULL),
+(49, 1, 1, 'Perancangan Sistem Monitoring Aliran daya Menggunakan Mikrokontroller', 'Wira Aprianto Ilham ', NULL, 'D41116017', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 ILH            p', NULL, NULL, NULL, NULL),
+(50, 1, 1, 'Rancang Bangun Generator Linier Untuk Konversi Energi Gelombang Air Laut', 'Ahmad Asadul Kadar ', NULL, 'D41116507', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 KAD           r ', NULL, NULL, NULL, NULL),
+(51, 1, 1, 'Studi Potensi Pembangkit Listrik Tenaga Surya Berbasis Aplikasi Geographic Information System (GIS) Studi Kasus ', 'Fadli Alfiansyah ', NULL, 'D41116314', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 ALF            s ', NULL, NULL, NULL, NULL),
+(52, 1, 1, 'Perancangan Kontrol Automatic  Transfer Switch (ATS) Berbasis Programmable Logic Control (PLC) Siemens Simatic S7-300', 'Muh Amri Arfah ', NULL, 'D41116006', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 ARF           p', NULL, NULL, NULL, NULL),
+(53, 1, 1, 'Inverter DC-AC 220-230 VAC Pada Sistem Listrik Hibrid Energi Terbarukan Skala Rumah', 'Muhammad Aswan ', NULL, 'D41116312', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 ASW          i', NULL, NULL, NULL, NULL),
+(54, 1, 1, 'Analisis Losses sistem distribusi 20 KV PT. PLN ULP Panakkukang Penyulang Antang Menggunakan Etap16.0', 'Andi Abdul Azis Mappabeta ', NULL, 'D41114528', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 MAP          a', NULL, NULL, NULL, NULL),
+(55, 1, 1, 'Algoritma Hybrid PSO-BA (HPSOBA) Untuk Penyelesaian Optimal Reactive Power Flow (ORPF) Pada Aplikasi VSC-HVDC', 'Zulfiana Safitri Majid', NULL, NULL, 'TEKNIK ELEKTRO', 1, 1, 0, 'SKR-2021 MAJ          a', NULL, NULL, '2022-06-25 12:18:01', NULL),
+(56, 1, 1, 'Studi Kontingensi Sistem Interkoneksi Sulbagse', 'A. Anugrah Paranrengi ', NULL, 'D41116310', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 PAR          p', NULL, NULL, NULL, NULL),
+(57, 1, 1, 'Analisis Formulasi Akurasi Posisi Distorsi Pada Efek Frequency Sharing Teknologi 5G', 'Reski Amalia ', NULL, 'D41171010', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 AMA          a', NULL, NULL, NULL, NULL),
+(58, 1, 1, 'Perancangan Jaringan FTTH Menggunakan Aplikasi Optisystem, Tabel BOQ Dan Kurva S', 'Sri Rafika Muhtar ', NULL, 'D41171020', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 MUH          p', NULL, NULL, NULL, NULL),
+(59, 1, 1, 'Kontrol Pengisian Baterai Otomatis Pada Sistem Keamana Rumah Berbasis IOT', 'Syahril Febriansyah ', NULL, 'D41116025', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 FEB            k', NULL, NULL, NULL, NULL),
+(60, 1, 1, 'Pemodelan Simulink Heat Exchanger Pada Alat Boiler Heating Batching Control Trainer(Model:SE 107)', 'Fajri Tawakkal Ali ', NULL, 'D41114030', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 ALI            p', NULL, NULL, NULL, NULL),
+(61, 1, 1, 'Optimisasi Daya Aktif PLTU 2 Sulawesi Utara (Amurang) Mempertimbangkan Emisi', 'Nurul Fadillah ', NULL, 'D41171005', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 FAD          o', NULL, NULL, NULL, NULL),
+(62, 1, 1, 'Sistem Monitoring Volume Underground Tank SPBU Berbasis Mikrokontroler Raspberry PI', 'Siswono      ', NULL, 'D41114021', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 SIS             s', NULL, NULL, NULL, NULL),
+(63, 1, 1, 'Pengembangan Teknologi Smart Hybrid Reader Untuk Sistem Smart Campus Unhas', 'Cahya Rezky Prihatmoko ', NULL, 'D41116013', 'TEKNIK ELEKTRO', 1, 1, 1, 'SKR-2021 PRI            p', NULL, NULL, NULL, NULL),
+(64, 1, 1, 'Prototipe Sistem Pendingin (Freezer) Ikan Berbasis Energi Surya (Photovoltic) Pada Kapal Nelayan', 'Juarni ', NULL, 'D33114008', 'TEKNIK SISTEM PERKAPALAN', 1, 1, 1, 'SKR-2021 JUA           P           ', NULL, NULL, NULL, NULL),
+(65, 1, 1, 'Desain Sistem Pendingin Penyimpanan Ikan Berbasis Energi Surya', 'Nurmainnah ', NULL, 'D33114003', 'TEKNIK SISTEM PERKAPALAN', 1, 1, 1, 'SKR-2021 NUR             d', NULL, NULL, NULL, NULL),
+(66, 1, 2, 'Rekayasa  Perangkat Lunak (Buku I', 'Roger S. Pressman', 'Yogyakarta: Andi, 2002', NULL, NULL, 2002, 4, 1, '005.1/PRE', NULL, NULL, NULL, NULL),
+(67, 1, 2, 'Rangkaian listrik Jilid Pertama', 'Budiono Mismail', 'Bandung: ITB,  1995', NULL, NULL, 1995, 4, 1, '537.6 / MIS', NULL, NULL, NULL, NULL),
+(68, 1, 2, 'Roh dan citra kota: Peran perancangan kota sebagai kebijakan public', 'Bambang Heryanto', 'Sidoarjo :Brillian International, 2011', NULL, NULL, 2011, 4, 1, '711.4/HER', NULL, NULL, NULL, NULL),
+(69, 1, 2, 'Rahasia mudah menguasai photoshop', 'MADCOMS', 'Yogyakarta: Andi, 2012', NULL, NULL, 2012, 1, 1, '006.69/MAD', NULL, NULL, NULL, NULL),
+(70, 1, 2, 'Riset Operasi dalam pendekatan algoritmis', 'Jong Jek Siang', 'Yogyakarta: Andi, 2011', NULL, NULL, 2011, 2, 1, '003 / SIA', NULL, NULL, NULL, NULL),
+(71, 1, 2, 'Rangkaian Lisitrik', 'Mohamad Ramdhani', 'Bandung : Erlangga, 2008', NULL, NULL, 2008, 2, 1, '537.6 / RAM', NULL, NULL, NULL, NULL),
+(72, 1, 2, 'Robot Vision : Teknik membangun robot cerdas masa depan', 'Widodo Budiharto, Djoko Purwanto', 'Yogyakarta: Andi, 2012', NULL, NULL, 2012, 1, 1, '629.892 / BUD', NULL, NULL, NULL, NULL),
+(73, 1, 2, 'Rekayasa Perangkat Lunak : Terstruktur dan berorientasi objek', 'Rosa A.S dan M. Shalahuddin', 'bandung : informatika, 2018', NULL, NULL, 2018, 3, 1, '005.1 / ROS', NULL, NULL, NULL, NULL),
+(74, 1, 2, 'Reformasi perkotaan : mencegah wilayah Urban menjadi human Zoo', 'Eko Budihardjo', 'Jakarta: Kompas Media Nusantara,2014', NULL, NULL, 2014, 1, 1, '338.9 /BUD', NULL, NULL, NULL, NULL),
+(75, 1, 2, 'Rekayasa Hidrologi, edisi 1 revisi', 'Lily Montarcih Limantara', 'Yogyakarta : Andi, 2018', NULL, NULL, 2018, 3, 1, '551.48 / LIM', NULL, NULL, NULL, NULL),
+(76, 1, 2, 'Rekayasa Sistem manufaktur : memahami proses manufaktur untuk mendukung implementasi proyek six sigma lebih efektif', 'Saluddin', 'Jakarta : Mitra Wacana Media, 2016', NULL, NULL, 2016, 2, 1, '658.5/SAL', NULL, NULL, NULL, NULL),
+(77, 1, 2, 'Rangkaian listrik ', 'H. Sianipar', 'Bandung: Rekayasa Sains. 2015', NULL, NULL, 2015, 1, 1, '537 / SIA', NULL, NULL, NULL, NULL),
+(78, 1, 2, 'Reading strategis: materials for english MKU for International Use Only', '', 'Makassar9/17/2019  English Departemen, 2008', NULL, NULL, 2008, 1, 1, '372.4 / REA', NULL, NULL, NULL, NULL),
+(79, 1, 2, 'Releproteksi : prinsip dan aplikasi', 'Hendra Martha Yudha', 'Fak. Teknik Univ. Sriwijaya', NULL, NULL, 2020, 1, 1, '693.898 /YUD', NULL, NULL, NULL, NULL),
+(80, 1, 2, 'Restorasi Sungai : River Restoration', 'Agus Maryono', 'Yogyakarta: UGM, 2018', NULL, NULL, 2018, 3, 1, '628.112 / MAR', NULL, NULL, NULL, NULL),
+(81, 1, 2, 'Riset Operasi edisi ke 2', 'Sri Mulyono', 'Jakarta:Mitra Wacana Media, 2017', NULL, NULL, 2017, 1, 1, '001.424 / MUL', NULL, NULL, NULL, NULL),
+(82, 1, 2, 'Rekayasa Lalu-Lintas edisi ke-2', 'Leksmono Suryo Putranto', 'Jakarta: Indek, 2019', NULL, NULL, 2019, 1, 1, '627.701 / PUT', NULL, NULL, NULL, NULL),
+(83, 1, 2, 'Rekayasa Gambut. Briket batubara dan sampah organik: Usaha memanfaatkan sumberdaya alam yang terpinggirkan', 'Sukandarrumidi', 'Yogyakarta: Gadjah Mada Univ. Press, 2009', NULL, NULL, 2009, 2, 1, '662.623 / SUK', NULL, NULL, NULL, NULL),
+(84, 1, 2, 'Reparasi sistem pendinginan mesin mobil  edisi revisi', 'Daryanto', 'Jakarta: Bumi Aksara, 2019', NULL, NULL, 2019, 2, 1, '629.277.2 / DAR', NULL, NULL, NULL, NULL),
+(85, 1, 2, 'Rangka Atap Baja Ringan untuk semua', 'Iden Wildensyah', 'Bandung: Alfabeta, 2013', NULL, NULL, 2013, 1, 1, '695 / WIL', NULL, NULL, NULL, NULL),
+(86, 1, 2, 'Riset Operasi : Teori dan aplikasi untuk pengambilan keputusan', 'Mohamad Wahdi', 'Yogyakarta: CAPS, 2011', NULL, NULL, 2011, 1, 1, '330 / WAH', NULL, NULL, NULL, NULL),
+(87, 1, 2, 'Riset operasi : untuk pengambilan keputusan edisi Revisi', 'Johannes Supranto', 'Jakarta: Univ. Indoensia, 2014', NULL, NULL, 2014, 1, 1, '658.403.4/SUP', NULL, NULL, NULL, NULL),
+(88, 1, 2, 'Rekayasa Perangkat Lunak', 'Janner Simarmata', 'Yogyakarta: Andi, 2010', NULL, NULL, 2010, 1, 1, '005.1 / SIM', NULL, NULL, NULL, NULL),
+(89, 1, 2, 'Robotika Modern : Teori + implermentasi  (edisi revisi', 'Widodo Budiharto, Djoko Purwanto', 'Yogyakarta: Andi, 2010', NULL, NULL, 2010, 2, 1, '629.892 /BUD', NULL, NULL, NULL, NULL),
+(90, 1, 2, 'Rangkaian listrik edisi kedua', 'Joseph A. Edminister', 'Jakarta: Erlangga, 1984', NULL, NULL, 1984, 1, 1, '537 / EDM', NULL, NULL, NULL, NULL),
+(91, 1, 2, 'Rekayasa Pondasi Teori dan penyelesaian soal', 'Bambang Surendro', 'Yogyakarta : Graha Ilmu. 2015', NULL, NULL, 2015, 1, 1, '624.107.6 / SUR', NULL, NULL, NULL, NULL),
+(92, 1, 2, 'Rangkaian listrik', 'Cekman Cekdin, Taufik Barlian', 'Yogyakarta : Andi, 2013', NULL, NULL, 2013, 1, 1, '621.381.5 / CEK', NULL, NULL, NULL, NULL),
+(93, 1, 2, 'Reliability Centred Maintenance', 'Hadi Pranoto', 'Yogyakarta:  Mitra Wacana Media, 2015', NULL, NULL, 2015, 1, 1, '620.004 / PRA', NULL, NULL, NULL, NULL),
+(94, 1, 2, 'Robotika modern : Teori & implementasi (edisi revisi', 'Widodo Budiharto', 'Yogyakarta: Andi, 2014', NULL, NULL, 2014, 1, 1, '629.892 / BUD', NULL, NULL, NULL, NULL),
+(95, 1, 2, 'Refregeration & air conditioning', 'Wilbert F. Stoecker, Jerold W. Jones', 'Mc.Graw-Hill Book Company, 1982', NULL, NULL, 1982, 1, 1, '621.5\'6', NULL, NULL, NULL, NULL),
+(96, 1, 2, 'Ruang dalam arsitektur edisi ketiga, revisi', 'Cornelis Van De Ven', 'Jakarta : Gramedia Pustaka Utama, 1991', NULL, NULL, 1991, 1, 1, '720 / VEN', NULL, NULL, NULL, NULL),
+(97, 1, 2, 'Reformasi pengelolaan sumber daya air ', 'Agus Maryono', 'Yogyakarta: Gadjah Mada Univ. Press, 2017', NULL, NULL, 2017, 1, 1, NULL, NULL, NULL, NULL, NULL),
+(98, 1, 2, 'Robotika modern  : Teori dan implementari (edisi baru', 'Widodo Buidhardi', 'Yogyakarta : Andi, 2914', NULL, NULL, 2014, 1, 1, '629.892/ WID', NULL, NULL, NULL, NULL),
+(99, 1, 1, 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', 'Laura Natalia Nainggolan', NULL, 'D42115020', 'Teknik Informatika', 2020, 1, 1, NULL, 'public/docs/D42115020_Laura_Natalia_Nainggolan.PDF', '2022-03-23 13:05:20', '2022-03-23 14:21:08', NULL);
 
 -- --------------------------------------------------------
 
@@ -239,6 +240,30 @@ CREATE TABLE `reports` (
   `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `reports`
+--
+
+INSERT INTO `reports` (`id`, `account_id`, `docs_id`, `users_id`, `user_name`, `department`, `doc_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 13:05:28', '2022-03-23 13:05:28', NULL),
+(2, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 13:05:56', '2022-03-23 13:05:56', NULL),
+(3, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 13:06:55', '2022-03-23 13:06:55', NULL),
+(4, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 13:11:28', '2022-03-23 13:11:28', NULL),
+(5, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 14:13:35', '2022-03-23 14:13:35', NULL),
+(6, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 14:21:21', '2022-03-23 14:21:21', NULL),
+(7, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 14:21:49', '2022-03-23 14:21:49', NULL),
+(8, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 14:23:21', '2022-03-23 14:23:21', NULL),
+(9, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 14:31:36', '2022-03-23 14:31:36', NULL),
+(10, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 14:37:25', '2022-03-23 14:37:25', NULL),
+(11, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 14:39:01', '2022-03-23 14:39:01', NULL),
+(12, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 14:44:32', '2022-03-23 14:44:32', NULL),
+(13, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 14:45:40', '2022-03-23 14:45:40', NULL),
+(14, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 14:49:54', '2022-03-23 14:49:54', NULL),
+(15, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 14:50:30', '2022-03-23 14:50:30', NULL),
+(16, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 15:06:20', '2022-03-23 15:06:20', NULL),
+(17, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-23 15:08:11', '2022-03-23 15:08:11', NULL),
+(18, 1, 99, 1, 'John Doe', '', 'ANALISIS TEKNOLOGI OFFLINE-FIRST APP PASCA BENCANA PADA\r\nRUMAH SAKIT MENGGUNAKAN REACT JS', '2022-03-27 15:02:53', '2022-03-27 15:02:53', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -259,8 +284,8 @@ CREATE TABLE `types` (
 --
 
 INSERT INTO `types` (`id`, `account_id`, `name`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(0, 1, 'BUKU TEKNIK', '2022-01-20 12:26:00', NULL, NULL),
-(1, 1, 'TUGAS AKHIR', '2022-01-20 12:26:38', NULL, NULL);
+(1, 1, 'TUGAS AKHIR', '2022-01-20 12:26:38', NULL, NULL),
+(2, 1, 'BUKU TEKNIK', '2022-01-20 12:26:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -291,8 +316,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `account_id`, `first_name`, `last_name`, `NIM`, `department`, `email`, `password`, `owner`, `status`, `photo_path`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'John', 'Doe', NULL, NULL, 'johndoe@example.com', '$2y$10$G0r4Qdbljdce7tP3p//f.ucZ6eFyPl5hmjRImdSYqsxBOA.gZ6kyS', 1, 0, NULL, 'RwqzKwCWM1', '2022-01-08 14:43:32', '2022-01-08 14:43:32', NULL),
-(2, 1, 'Rusty', 'DuBuque', NULL, NULL, 'herman68@example.org', '$2y$10$m55eG0hhQEDHOgl4Scmv/euHY0ieQGmXYPKzSiylmb5CXc0An9Bu6', 0, 0, NULL, 'TwviviPoFs', '2022-01-08 14:43:33', '2022-01-08 14:43:33', NULL),
+(1, 1, 'John', 'Doe', NULL, NULL, 'admin@gmail.com', '$2y$10$G0r4Qdbljdce7tP3p//f.ucZ6eFyPl5hmjRImdSYqsxBOA.gZ6kyS', 1, 1, NULL, 'GGKuUhIvxCzThcEg7pqFKtYAyjb8ABiuvrljCr6V9WFrUtXRP3DVcXtKLjBQ', '2022-01-08 14:43:32', '2022-06-30 00:18:36', NULL),
+(2, 1, 'Rusty', 'DuBuque', NULL, NULL, 'user@example.org', '$2y$10$m55eG0hhQEDHOgl4Scmv/euHY0ieQGmXYPKzSiylmb5CXc0An9Bu6', 0, 0, NULL, 'OX8zBTZCk5NRLhmABxQWrRG2IyvtMTLHwyyViSiaeXa39waYkI8ORsYgoJsn', '2022-01-08 14:43:33', '2022-06-25 12:28:45', NULL),
 (3, 1, 'Edwin', 'Hodkiewicz', NULL, NULL, 'thalia.konopelski@example.com', '$2y$10$B51mSAayxKKverDIAXOKyeICc5RPtKmbUuvWfoT6LMxzsbEYDfR/O', 0, 0, NULL, 'mwy9sVV4Ib', '2022-01-08 14:43:33', '2022-01-08 14:43:33', NULL),
 (4, 1, 'America', 'Upton', NULL, NULL, 'destinee.fay@example.com', '$2y$10$1SgGxYcGaTJvdmRO3QAv/OGf4d/pMCvX25H9o4Fm32.jA8FDMZZcW', 0, 0, NULL, '7lxRcXpe8v', '2022-01-08 14:43:34', '2022-01-08 14:43:34', NULL),
 (5, 1, 'Rick', 'Graham', NULL, NULL, 'camila97@example.com', '$2y$10$m7q.Sc8reqdgER8Jc0Uic.jTymyA9xQJaxxIIAFc.Y4ojyoCCYNyG', 0, 0, NULL, 'HhSTuDJoUF', '2022-01-08 14:43:35', '2022-01-08 14:43:35', NULL),
@@ -373,7 +398,7 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT for table `docs`
 --
 ALTER TABLE `docs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -391,7 +416,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `types`
